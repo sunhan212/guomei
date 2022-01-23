@@ -1,0 +1,1 @@
+.2021-08-19 21:44:14.811 com.alibaba.druid.pool.DruidAbstractDataSource ERROR - minEvictableIdleTimeMillis should be greater than 30000

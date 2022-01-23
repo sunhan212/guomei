@@ -1,0 +1,75 @@
+server:
+  port: 8090
+
+mybatis:
+  mapperLocations: classpath:mapper/other/*.xml,classpath:mapper/*.xml
+
+
+spring:
+  datasource:
+    primary:
+      driver-class-name: com.mysql.jdbc.Driver
+      ## 互联网数据库
+      url: jdbc:mysql://101.68.86.229:23306/structgan?Unicode=true&characterEncoding=UTF-8&useSSL=false&allowMultiQueries=true
+      username: structgan
+      password: wyc!2022
+
+  jpa:
+    database: mysql
+    show-sql: false
+    hibernate:
+      ddl-auto: update
+      naming:
+#        按照定义大小写映射，除非table，column等额外设置
+        physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
+    properties:
+      hibernate:
+        jdbc:
+          batch_size: 2000
+          batch_versioned_date: true
+        order_inserts: true
+        order_updates: true
+  jackson:
+    date-format: yyyy-MM-dd HH:mm:ss
+    serialization:
+      indent_output: true
+  http:
+    multipart:
+      max-file-size: 50MB
+      max-request-size: 100MB
+
+Linux:
+  inphotopath: /data/java-prj/structGAN/structGAN/1_input_shearwall/architecture
+  intxtpath: /data/java-prj/structGAN/structGAN/1_input_shearwall/config
+  wallpypath: /data/java-prj/structGAN/structGAN/StructGAN_p1_wall_20220117.py
+  outpath: /data/java-prj/structGAN/structGAN/1_output_shearwall
+
+Windows:
+  inphotopath: C:\Users\Myux\Desktop\local\1_input_shearwall\architecture
+  intxtpath: C:\Users\Myux\Desktop\local\1_input_shearwall\config
+  wallpypath: C:\Users\Myux\Desktop\local\StructGAN_p1_wall_20220117.py
+  outpath: C:\Users\Myux\Desktop\local\1_output_shearwall
+# uucs用户中心配置
+user-center:
+  # 互联网地址
+  basePath: https://api.mingyoutang.cn/backend/bj-uucs
+  # 请求参数
+  getTokenParam:
+    ## ak
+    access_key: EnGfvA5wus
+    access_secret: ifVpv2Zde0NN9oiGk3ONWbJxNySRfWMY
+    grant_type: client_credentials
+  # 接口地址
+  userInfo: /v2/tp/user/info # 用户信息
+  getToken: /v2/tp/oauth/token # 获取token
+  getUserCode: /v2/tp/user/code_generate  # 获取user_code
+  orgRootInfo: /v2/tp/org/root_info # 根组织
+  orgList: /v2/tp/org/list # 组织列表
+  orgInfo: /v2/tp/org/info # 组织信息
+  userList: /v2/tp/user/list # 用户列表
+  userAdd: /v2/tp/user/add   # 用户添加
+  userRole: /v2/tp/user/role_list # 用户角色信息
+  userExternalInviteCode: /v2/tp/user/external/join_by_invite_code # 通过邀请码加入合作伙伴/客户
+  userExternalAdd: /v2/tp/user/external/add # 外部用户添加
+  authProcess: /v2/tp/auth_manage/auth_process  # 用户授权重置
+
