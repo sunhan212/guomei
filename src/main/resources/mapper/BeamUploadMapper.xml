@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.youlishu.dao.BeamUploadMapper">
+  <resultMap id="BaseResultMap" type="com.youlishu.bean.BeamTransformInfo">
+    <!--@mbg.generated-->
+    <!--@Table wall_transform_info-->
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="prj_name" jdbcType="VARCHAR" property="prjName" />
+    <result column="prj_status" jdbcType="VARCHAR" property="prjStatus" />
+    <result column="wall_out_png_url" jdbcType="VARCHAR" property="wallOutPngUrl" />
+    <result column="wall_out_txt_url" jdbcType="VARCHAR" property="wallOutTxtUrl" />
+    <result column="beam_in_txt_url" jdbcType="VARCHAR" property="beamInTxtUrl" />
+    <result column="beam_in_png_url" jdbcType="VARCHAR" property="beamInPngUrl" />
+    <result column="beam_out_txt_url" jdbcType="VARCHAR" property="beamOutTxtUrl" />
+    <result column="beam_out_png_url" jdbcType="VARCHAR" property="beamOutPngUrl" />
+    <result column="beam_upload_time" jdbcType="TIMESTAMP" property="beamUploadTime" />
+    <result column="wall_upload_time" jdbcType="TIMESTAMP" property="wallUploadTime" />
+    <result column="transform_time" jdbcType="TIMESTAMP" property="transformTime" />
+    <result column="txt_file_name" jdbcType="VARCHAR" property="txtFileName" />
+    <result column="png_file_name" jdbcType="VARCHAR" property="pngFileName" />
+    <result column="user_name" jdbcType="VARCHAR" property="userName" />
+
+  </resultMap>
+  <sql id="Base_Column_List">
+    <!--@mbg.generated-->
+    id,
+    prj_name,
+    prj_status,
+    wall_out_png_url,
+    wall_out_txt_url,
+    beam_in_txt_url,
+    beam_in_png_url,
+    beam_out_txt_url,
+    beam_out_png_url,
+    beam_upload_time,
+    wall_upload_time,
+    transform_time,
+    txt_file_name,
+    png_file_name,
+    user_name
+  </sql>
+  <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="com.youlishu.bean.BeamTransformInfo" useGeneratedKeys="true">
+    <!--@mbg.generated-->
+    insert into beam_transform_info
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="userName != null">
+        user_name,
+      </if>
+      <if test="beamInTxtUrl != null">
+        beam_in_txt_url,
+      </if>
+      <if test="beamInPngUrl != null">
+        beam_in_png_url,
+      </if>
+      <if test="beamOutTxtUrl != null">
+        beam_out_txt_url,
+      </if>
+      <if test="beamOutPngUrl != null">
+        beam_out_png_url,
+      </if>
+      <if test="beamUploadTime != null">
+        beam_upload_time,
+      </if>
+      <if test="transformTime != null">
+        transform_time,
+      </if>
+      <if test="txtFileName != null">
+        txt_file_name,
+      </if>
+      <if test="pngFileName != null">
+        png_file_name,
+      </if>
+      <if test="prjName != null">
+        prj_name,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="userName != null">
+        #{userName,jdbcType=VARCHAR},
+      </if>
+      <if test="beamInTxtUrl != null">
+        #{beamInTxtUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="beamInPngUrl != null">
+        #{beamInPngUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="beamOutTxtUrl != null">
+        #{beamOutTxtUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="beamOutPngUrl != null">
+        #{beamOutPngUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="beamUploadTime != null">
+        #{beamUploadTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="transformTime != null">
+        #{transformTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="txtFileName != null">
+        #{txtFileName,jdbcType=VARCHAR},
+      </if>
+      <if test="pngFileName != null">
+        #{pngFileName,jdbcType=VARCHAR},
+      </if>
+      <if test="prjName != null">
+        #{prjName,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <insert id="insertBeamOfWall" keyColumn="id" keyProperty="id" parameterType="com.youlishu.bean.BeamTransformInfo" useGeneratedKeys="true">
+    <!--@mbg.generated-->
+    insert into beam_transform_info
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="wallOutTxtUrl != null">
+        wall_out_txt_url,
+      </if>
+      <if test="wallOutPngUrl != null">
+        wall_out_png_url,
+      </if>
+      <if test="wallUploadTime != null">
+        wall_upload_time
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="wallOutTxtUrl != null">
+        #{wallOutTxtUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="wallOutPngUrl != null">
+        #{wallOutPngUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="wallUploadTime != null">
+        #{wallUploadTime,jdbcType=TIMESTAMP}
+      </if>
+    </trim>
+  </insert>
+
+</mapper>

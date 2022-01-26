@@ -1,0 +1,217 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.youlishu.dao.BeamTransformMapper">
+  <resultMap id="BaseResultMap" type="com.youlishu.bean.BeamTransformInfo">
+    <!--@mbg.generated-->
+    <!--@Table wall_transform_info-->
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="prj_name" jdbcType="VARCHAR" property="prjName" />
+    <result column="prj_status" jdbcType="VARCHAR" property="prjStatus" />
+    <result column="wall_out_png_url" jdbcType="VARCHAR" property="wallOutPngUrl" />
+    <result column="wall_out_txt_url" jdbcType="VARCHAR" property="wallOutTxtUrl" />
+    <result column="beam_in_txt_url" jdbcType="VARCHAR" property="beamInTxtUrl" />
+    <result column="beam_in_png_url" jdbcType="VARCHAR" property="beamInPngUrl" />
+    <result column="beam_out_txt_url" jdbcType="VARCHAR" property="beamOutTxtUrl" />
+    <result column="beam_out_png_url" jdbcType="VARCHAR" property="beamOutPngUrl" />
+    <result column="beam_upload_time" jdbcType="TIMESTAMP" property="beamUploadTime" />
+    <result column="wall_upload_time" jdbcType="TIMESTAMP" property="wallUploadTime" />
+    <result column="transform_time" jdbcType="TIMESTAMP" property="transformTime" />
+    <result column="txt_file_name" jdbcType="VARCHAR" property="txtFileName" />
+    <result column="png_file_name" jdbcType="VARCHAR" property="pngFileName" />
+    <result column="user_name" jdbcType="VARCHAR" property="userName" />
+
+  </resultMap>
+  <sql id="Base_Column_List">
+    <!--@mbg.generated-->
+    id,
+    prj_name,
+    prj_status,
+    wall_out_png_url,
+    wall_out_txt_url,
+    beam_in_txt_url,
+    beam_in_png_url,
+    beam_out_txt_url,
+    beam_out_png_url,
+    beam_upload_time,
+    wall_upload_time,
+    transform_time,
+    txt_file_name,
+    png_file_name,
+    user_name
+  </sql>
+  <!--查询梁板数据列表-->
+  <select id="findBeamInfo" resultMap="BaseResultMap">
+    SELECT  id,
+            prj_name,
+            prj_status,
+            wall_out_png_url,
+            wall_out_txt_url,
+            beam_in_txt_url,
+            beam_in_png_url,
+            beam_out_txt_url,
+            beam_out_png_url,
+            beam_upload_time,
+            wall_upload_time,
+            transform_time,
+            txt_file_name,
+            png_file_name,
+            user_name
+    FROM beam_transform_info
+    WHERE user_name = #{userName}
+    ORDER BY transform_time DESC
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    <!--@mbg.generated-->
+    select 
+    <include refid="Base_Column_List" />
+    from wall_transform_info
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    <!--@mbg.generated-->
+    delete from wall_transform_info
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" keyColumn="id" keyProperty="id" parameterType="com.youlishu.bean.WallTransformInfo" useGeneratedKeys="true">
+    <!--@mbg.generated-->
+    insert into wall_transform_info (user_name, in_txt_url, in_png_url, 
+      out_txt_url, out_png_url, upload_time, 
+      transform_time, txt_file_name, png_file_name, 
+      prj_name)
+    values (#{userName,jdbcType=VARCHAR}, #{inTxtUrl,jdbcType=VARCHAR}, #{inPngUrl,jdbcType=VARCHAR}, 
+      #{outTxtUrl,jdbcType=VARCHAR}, #{outPngUrl,jdbcType=VARCHAR}, #{uploadTime,jdbcType=TIMESTAMP}, 
+      #{transformTime,jdbcType=TIMESTAMP}, #{txtFileName,jdbcType=VARCHAR}, #{pngFileName,jdbcType=VARCHAR}, 
+      #{prjName,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="com.youlishu.bean.WallTransformInfo" useGeneratedKeys="true">
+    <!--@mbg.generated-->
+    insert into wall_transform_info
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="userName != null">
+        user_name,
+      </if>
+      <if test="inTxtUrl != null">
+        in_txt_url,
+      </if>
+      <if test="inPngUrl != null">
+        in_png_url,
+      </if>
+      <if test="outTxtUrl != null">
+        out_txt_url,
+      </if>
+      <if test="outPngUrl != null">
+        out_png_url,
+      </if>
+      <if test="uploadTime != null">
+        upload_time,
+      </if>
+      <if test="transformTime != null">
+        transform_time,
+      </if>
+      <if test="txtFileName != null">
+        txt_file_name,
+      </if>
+      <if test="pngFileName != null">
+        png_file_name,
+      </if>
+      <if test="prjName != null">
+        prj_name,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="userName != null">
+        #{userName,jdbcType=VARCHAR},
+      </if>
+      <if test="inTxtUrl != null">
+        #{inTxtUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="inPngUrl != null">
+        #{inPngUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="outTxtUrl != null">
+        #{outTxtUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="outPngUrl != null">
+        #{outPngUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="uploadTime != null">
+        #{uploadTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="transformTime != null">
+        #{transformTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="txtFileName != null">
+        #{txtFileName,jdbcType=VARCHAR},
+      </if>
+      <if test="pngFileName != null">
+        #{pngFileName,jdbcType=VARCHAR},
+      </if>
+      <if test="prjName != null">
+        #{prjName,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.youlishu.bean.WallTransformInfo">
+    <!--@mbg.generated-->
+    update wall_transform_info
+    <set>
+      <if test="userName != null">
+        user_name = #{userName,jdbcType=VARCHAR},
+      </if>
+      <if test="inTxtUrl != null">
+        in_txt_url = #{inTxtUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="inPngUrl != null">
+        in_png_url = #{inPngUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="outTxtUrl != null">
+        out_txt_url = #{outTxtUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="outPngUrl != null">
+        out_png_url = #{outPngUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="uploadTime != null">
+        upload_time = #{uploadTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="transformTime != null">
+        transform_time = #{transformTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="txtFileName != null">
+        txt_file_name = #{txtFileName,jdbcType=VARCHAR},
+      </if>
+      <if test="pngFileName != null">
+        png_file_name = #{pngFileName,jdbcType=VARCHAR},
+      </if>
+      <if test="prjName != null">
+        prj_name = #{prjName,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="update" parameterType="com.youlishu.bean.BeamTransformInfo">
+    <!--@mbg.generated-->
+    update beam_transform_info
+    set
+      out_txt_url = #{outTxtUrl,jdbcType=VARCHAR},
+      out_png_url = #{outPngUrl,jdbcType=VARCHAR},
+      transform_time = #{transformTime,jdbcType=TIMESTAMP}
+    where user_name = #{userName,jdbcType=VARCHAR} and prj_name = #{prjName,jdbcType=VARCHAR}
+  </update>
+  <select id="findWallInfo" resultMap="BaseResultMap">
+    SELECT in_txt_url,in_png_url,out_txt_url,out_png_url,upload_time,prj_name
+    FROM wall_transform_info
+    WHERE user_name = #{userName}
+    ORDER BY upload_time DESC
+  </select>
+
+  <select id="getinfo" resultMap="BaseResultMap">
+    SELECT txt_file_name,png_file_name from beam_transform_info where user_name = #{username} and prj_name = #{prjname}
+  </select>
+
+  <insert id="insertoutinfo" keyColumn="id" keyProperty="id" parameterType="com.youlishu.bean.WallTransformInfo" useGeneratedKeys="true">
+    <!--@mbg.generated-->
+    insert into wall_transform_info (out_txt_url, out_png_url,transform_time)
+    values ( #{outTxtUrl,jdbcType=VARCHAR}, #{outPngUrl,jdbcType=VARCHAR},
+    #{transformTime,jdbcType=TIMESTAMP}) where user_name = #{userName,jdbcType=VARCHAR} and prj_name = #{prjName,jdbcType=VARCHAR}
+  </insert>
+</mapper>

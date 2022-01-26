@@ -44,11 +44,25 @@ Linux:
   wallpypath: /data/java-prj/structGAN/structGAN/StructGAN_p1_wall_20220117.py
   outpath: /data/java-prj/structGAN/structGAN/1_output_shearwall
 
+  beaminpicpath: /data/java-prj/structGAN/structGAN/2_input_beam/architecture
+  beamintxtpath: /data/java-prj/structGAN/structGAN/2_input_beam/config
+  beamoutpicpath: /data/java-prj/structGAN/structGAN/2_output_beam
+  beamouttxtpath: /data/java-prj/structGAN/structGAN/2_output_beam
+  beampypath: /data/java-prj/structGAN/structGAN/StructGAN_p2_beam_20220117.py
+  beamoutpath: /data/java-prj/structGAN/structGAN/2_output_beam
+
 Windows:
   inphotopath: C:\Users\Myux\Desktop\local\1_input_shearwall\architecture
   intxtpath: C:\Users\Myux\Desktop\local\1_input_shearwall\config
   wallpypath: C:\Users\Myux\Desktop\local\StructGAN_p1_wall_20220117.py
   outpath: C:\Users\Myux\Desktop\local\1_output_shearwall
+
+  beaminpicpath: C:\Users\COCI\Desktop\local\2_input_beam\architecture
+  beamintxtpath: C:\Users\COCI\Desktop\local\2_input_beam\config
+  beamoutpicpath: C:\Users\COCI\Desktop\local\2_output_beam
+  beamouttxtpath: C:\Users\COCI\Desktop\local\2_output_beam
+  beampypath: C:\Users\COCI\Desktop\local\StructGAN_p2_beam_20220117.py
+  beamoutpath: C:\Users\COCI\Desktop\local\2_output_beam
 # uucs用户中心配置
 user-center:
   # 互联网地址
