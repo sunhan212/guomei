@@ -8,6 +8,8 @@ import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
 import org.apache.catalina.servlet4preview.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -27,7 +29,8 @@ public class UploadController {
     /**
      * 上传需要转换的图片和txt参数
      */
-    @GetMapping("/inwall")
+    @RequestMapping(value = "/inwall", method = RequestMethod.POST,consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
+    @Transactional(rollbackFor = Exception.class)
     @ApiOperation(value = "上传转换数据", notes = "上传转换剪力墙需要的图片及参数")
     @ApiImplicitParams({
             @ApiImplicitParam(name = "file", value = "png图片", required = true, dataType = "Param"),
@@ -37,7 +40,7 @@ public class UploadController {
             @ApiImplicitParam(name = "token", value = "验证码", required = true, dataType = "header"),
             @ApiImplicitParam(name = "username", value = "用户名", required = true, dataType = "header")
     })
-    private ResponseBean transformWall(@RequestParam("file") MultipartFile file,
+    public ResponseBean transformWall(@RequestPart("file") MultipartFile file,
                                        @RequestParam(required = false)String seismic,
                                        @RequestParam(required = false)String structure,
                                        @RequestParam(required = false)String scale,
@@ -45,15 +48,15 @@ public class UploadController {
         try {
             String username = request.getHeader("username");
 
-            int a = transformWallService.transformwall(file,username,seismic,structure,scale,prjname);
-            if (a == 1) {
-                return new ResponseBean(200,"上传成功",null);
+            String a = transformWallService.transformwall(file,username,seismic,structure,scale,prjname);
+            if (a == "1") {
+                return new ResponseBean(200,"上传成功","成功");
             }else {
-                return new ResponseBean(500, "上传失败", null);
+                return new ResponseBean(501, "数据上传失败", a);
             }
         }catch (Exception e) {
             e.printStackTrace();
-            return new ResponseBean(500, "上传失败", e.getMessage());
+            return new ResponseBean(500, file.getOriginalFilename()+"文件上传失败", e.getMessage());
         }
     }
 }

@@ -159,7 +159,7 @@
     where user_name = #{userName,jdbcType=VARCHAR} and prj_name = #{prjName,jdbcType=VARCHAR}
   </update>
   <select id="findWallInfo" resultMap="BaseResultMap">
-    SELECT in_txt_url,in_png_url,out_txt_url,out_png_url,upload_time,prj_name
+    SELECT id,in_txt_url,in_png_url,out_txt_url,out_png_url,upload_time,prj_name,txt_file_name,png_file_name
     FROM wall_transform_info
     WHERE user_name = #{userName}
     ORDER BY upload_time DESC

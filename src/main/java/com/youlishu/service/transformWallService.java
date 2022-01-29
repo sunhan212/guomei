@@ -41,6 +41,12 @@ public class transformWallService {
     @Value("${Linux.intxtpath}")
     private String intxtpath;
 
+    @Value("${Linux.inphotopathurl}")
+    private String inphotopathurl;
+
+    @Value("${Linux.intxtpathurl}")
+    private String intxtpathurl;
+
     @Value("${Linux.outpath}")
     private String outpath;
 
@@ -53,9 +59,10 @@ public class transformWallService {
      * 上传需要转换的图片及参数
      * @param
      */
-    public int transformwall(MultipartFile file, String username,String seismic,String structure, String scale,String prjname) {
+    public String transformwall(MultipartFile file, String username,String seismic,String structure, String scale,String prjname) {
         String fileName = file.getOriginalFilename();
         fileName = getFileName(fileName);
+//        StringBuffer sb = new StringBuffer();
         try {
             if (!file.isEmpty()) {
                 //上传图片 我也不知道这个try为啥这样写 但是能跑别改
@@ -65,44 +72,55 @@ public class transformWallService {
                     out.write(file.getBytes());
                     out.flush();
                     out.close();
-                    //生成txt参数文件
+//                    sb.append(1);
+                    //生成txt参数
+                    //拼接文件txt文件里面的内容，规则就是加起来用，隔开
                     String txt = seismic+", "+structure+", "+scale;
+                    //给文本改一下png的后缀
                     String txtFileName = fileName.replace(".png",".txt");
+                    //生成一个txt文件
                     File txtfile = new File(intxtpath + File.separator + txtFileName);
+                    //写入拼接好的文本内容
                     FileWriter fw = new FileWriter(txtfile);
                     fw.write(txt);
                     fw.close();
+//                    sb.append(2);
                     //数据库添加信息
-                    String inPngPath = inphotopath + File.separator + fileName;
-                    String inTxtPath = intxtpath + File.separator + txtFileName;
+                    String inPngPath = inphotopathurl + fileName;
+//                    sb.append(3);
+                    String inTxtPath = intxtpathurl + fileName.replace(".png",".txt");
+//                    sb.append(4);
                     WallTransformInfo wallTransformInfo = new WallTransformInfo();
                     wallTransformInfo.setUploadTime(date);
                     wallTransformInfo.setUserName(username);
                     wallTransformInfo.setInPngUrl(inPngPath);
                     wallTransformInfo.setInTxtUrl(inTxtPath);
-                    wallTransformInfo.setTxtFileName(txtFileName);
+                    wallTransformInfo.setTxtFileName(fileName+".txt");
                     wallTransformInfo.setPngFileName(fileName);
                     wallTransformInfo.setPrjName(prjname);
+//                    sb.append(5);
                     wallTransformInfoMapper.insertSelective(wallTransformInfo);
+//                    sb.append(6);
                     //日志
                     UserLog userLog = new UserLog();
                     userLog.setUsername(username);
                     userLog.setTime(date);
                     userLog.setContent("用户："+username+"在"+dateFormat.format(date)+"进行剪力墙数据上传");
                     userLogMapper.insert(userLog);
+//                    sb.append(6);
 
-                    return 1;
+                    return "1";
                 } catch (FileNotFoundException e) {
-                    return 0;
+                    return e.getMessage();
                 } catch (IOException e) {
-                    return 0;
+                    return e.getMessage();
                 }
             }
         }catch (Exception e) {
             e.printStackTrace();
-            return 0;
+            return e.getMessage();
         }
-        return 1;
+        return "1";
 
     }
 
@@ -112,13 +130,12 @@ public class transformWallService {
      */
     public int uploadTransformInfo(String prjname,String username) {
         try {
-
+            //先找到这个文件名
             WallTransformInfo info = wallTransformInfoMapper.getinfo(username,prjname);
-
-            String outpngurl = outpath+File.separator+info.getPngFileName();
-
-            String deouttxturl = outpath+File.separator+info.getTxtFileName();
-            String outtxturl = deouttxturl.replace(".txt",".png.txt");
+            //生成查看输出图片的地址
+            String outpngurl = outpath+info.getPngFileName();
+            //生成查看输出文本的地址
+            String outtxturl = outpath+info.getTxtFileName();
             WallTransformInfo transinfo = new WallTransformInfo();
             transinfo.setOutPngUrl(outpngurl);
             transinfo.setOutTxtUrl(outtxturl);

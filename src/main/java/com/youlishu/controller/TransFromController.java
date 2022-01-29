@@ -55,26 +55,45 @@ public class TransFromController {
     })
     @GetMapping("/inwall")
     private ResponseBean transformWall( String prjname ,HttpServletRequest request){
-        String[] arguments = new String[] {"python", wallpypath};
+        //服务器运行python脚本，这一步其实会把所有的文件都转换了，但是数据库不落入信息，用户也看不到
+        String arguments = "python3 /data/java-prj/structGAN/structGAN/StructGAN_p1_wall_20220117.py";
+//        String[] arguments = {"C:\\Users\\Myux\\Desktop\\local", "\\StructGAN_p1_wall_20220117.py"};
+
         String username = request.getHeader("username");
+        Process proc;
         try {
-            Process process = Runtime.getRuntime().exec(arguments);
-            BufferedReader in = new BufferedReader(new InputStreamReader(process.getInputStream()));
+//            Process process = Runtime.getRuntime().exec(arguments);
+//            BufferedReader in = new BufferedReader(new InputStreamReader(process.getInputStream()));
+//            in.close();
+//            int re = process.waitFor();
+//            System.out.println(re);
+            // 执行py文件
+//            proc = Runtime.getRuntime().exec("python3" + wallpypath);
+            proc = Runtime.getRuntime().exec(arguments);
 
+            BufferedReader in = new BufferedReader(new InputStreamReader(proc.getInputStream()));
+            String result = in.readLine();
+            String line = null;
+            while ((line = in.readLine()) != null) {
+                System.out.println(line);
+            }
             in.close();
-            int a = transformWallService.uploadTransformInfo(prjname,username);
-            if (a == 1){
-                return new ResponseBean(200,"转换成功",null);
+            //服务器命令执行成功只能是0，其他都是失败
+            int re = proc.waitFor();
+            if (re == 0){
+                int a = transformWallService.uploadTransformInfo(prjname,username);
+                if (a == 1){
+                    return new ResponseBean(200,"转换成功","成功");
+                }else {
+                    return new ResponseBean(500,"数据输入失败","失败");
+                }
             }
-            else if (a == 0){
-                return new ResponseBean(500, "转换失败", null);
+            else{
+                return new ResponseBean(501, "算法转换失败", re+result);
             }
-            int re = process.waitFor();
-
-            return new ResponseBean(200,"转换成功",null);
         } catch (Exception e) {
             e.printStackTrace();
-            return new ResponseBean(500, "转换失败", null);
+            return new ResponseBean(502, "系统转换失败", e.getMessage());
         }
     }
 }
