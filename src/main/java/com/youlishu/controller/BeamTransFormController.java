@@ -34,11 +34,11 @@ public class BeamTransFormController {
     @Autowired
     private BeamTransformService beamTransformService;
 
-      @Value("${Windows.beampypath}")
-      private String beampypath;
+//      @Value("${Windows.beampypath}")
+//      private String beampypath;
 
-    //@Value("${Linux.beampypath}")
-    //private String beampypath;
+    @Value("${Linux.beampypath}")
+    private String beampypath;
 
 
 
@@ -54,28 +54,41 @@ public class BeamTransFormController {
             @ApiImplicitParam(name = "token", value = "验证码", required = true, dataType = "header"),
             @ApiImplicitParam(name = "username", value = "用户名", required = true, dataType = "header")
     })
-    @GetMapping("/inwall")
-    private ResponseBean transformWall(String prjname , HttpServletRequest request){
-        String[] arguments = new String[] {"python", beampypath};
+    @GetMapping("/inbeam")
+    private ResponseBean transformBeam(String prjname , HttpServletRequest request){
+        //服务器地址
+        String arguments = "python3 /data/java-prj/structGAN/structGAN/StructGAN_p2_beam_20220117.py";
+        //本地
+        //String[] arguments = {"C:\\Users\\COCI\\Desktop\\local", "\\StructGAN_p2_beam_20220117.py"};
+        //String[] arguments = new String[] {"python", beampypath};
         String username = request.getHeader("username");
+        Process proc;
         try {
-            Process process = Runtime.getRuntime().exec(arguments);
-            BufferedReader in = new BufferedReader(new InputStreamReader(process.getInputStream()));
+            proc = Runtime.getRuntime().exec(arguments);
 
+            BufferedReader in = new BufferedReader(new InputStreamReader(proc.getInputStream()));
+            String result = in.readLine();
+            String line = null;
+            while ((line = in.readLine()) != null) {
+                System.out.println(line);
+            }
             in.close();
-            int a = beamTransformService.uploadBeamTransformInfo(prjname,username);
-            if (a == 1){
-                return new ResponseBean(200,"转换成功",null);
+            //服务器命令执行成功只能是0，其他都是失败
+            int re = proc.waitFor();
+            if (re == 0){
+                int a = beamTransformService.uploadBeamTransformInfo(prjname,username);
+                if (a == 1){
+                    return new ResponseBean(200,"转换成功","成功");
+                }else {
+                    return new ResponseBean(500,"数据输入失败","失败");
+                }
             }
-            else if (a == 0){
-                return new ResponseBean(500, "转换失败", null);
+            else{
+                return new ResponseBean(501, "算法转换失败", re+result);
             }
-            int re = process.waitFor();
-
-            return new ResponseBean(200,"转换成功",null);
         } catch (Exception e) {
             e.printStackTrace();
-            return new ResponseBean(500, "转换失败", null);
+            return new ResponseBean(502, "系统转换失败", e.getMessage());
         }
     }
 

@@ -23,20 +23,32 @@ public class BeamTransformService {
 //    @Value("${Windows.beaminpicpath}")
 //    private String beaminpicpath;
 //
-//    @Value("${Windows.beamintxtpath}")
-//    private String beamintxtpath;
+//    @Value("${Windows.beamoutpicpath}")
+//    private String beamoutpicpath;
 //
-//    @Value("${Windows.beamoutpath}")
-//    private String beamoutpath;
+//    @Value("${Windows.walloutpicpath}")
+//    private String walloutpicpath;
+//
+//    @Value("${Windows.beamouttxtpath}")
+//    private String beamouttxtpath;
+//
+//    @Value("${Windows.beampypath}")
+//    private String beampypath;
 
     @Value("${Linux.beaminpicpath}")
     private String beaminpicpath;
+    @Value("${Linux.beaminpicpathurl}")
+    private String beaminpicpathurl;
 
-    @Value("${Linux.beamintxtpath}")
-    private String beamintxtpath;
+    @Value("${Linux.wallinpicpath}")
+    private String wallinpicpath;
+    @Value("${Linux.wallinpicpathurl}")
+    private String wallinpicpathurl;
 
     @Value("${Linux.beamoutpath}")
     private String beamoutpath;
+    @Value("${Linux.beamoutpathurl}")
+    private String beamoutpathurl;
 
 
 
@@ -46,13 +58,13 @@ public class BeamTransformService {
 
     public int uploadBeamTransformInfo(String prjname, String username) {
         try {
-
+            //先找到文件名
             BeamTransformInfo info = beamTransformMapper.getinfo(username,prjname);
-
-            String outpngurl = beamoutpath+ File.separator+info.getPngFileName();
-
-            String deouttxturl = beamoutpath+File.separator+info.getTxtFileName();
-            String outtxturl = deouttxturl.replace(".txt",".png.txt");
+            //生成查看输出图片的地址
+            String outpngurl = beamoutpathurl+ File.separator+info.getPngFileName();
+            //生成查看输出文本的地址
+            String outtxturl = beamoutpathurl+File.separator+info.getTxtFileName();
+            //String outtxturl = deouttxturl.replace(".txt",".png.txt");
             BeamTransformInfo transinfo = new BeamTransformInfo();
             transinfo.setBeamOutPngUrl(outpngurl);
             transinfo.setBeamOutTxtUrl(outtxturl);

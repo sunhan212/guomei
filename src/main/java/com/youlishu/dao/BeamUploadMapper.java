@@ -10,5 +10,7 @@ public interface BeamUploadMapper {
 
     int insertSelective(BeamTransformInfo beamTransformInfo);
 
-    int insertBeamOfWall(BeamTransformInfo beamTransformInfo);
+    int insertBeamAndWall(BeamTransformInfo beamTransformInfo);
+
+    int insertWall(BeamTransformInfo beamTransformInfo);
 }

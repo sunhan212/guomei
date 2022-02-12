@@ -43,7 +43,7 @@ Linux:
   intxtpath: /data/java-prj/structGAN/structGAN/1_input_shearwall/config
   wallpypath: /data/java-prj/structGAN/structGAN/StructGAN_p1_wall_20220117.py
   outpath: /data/java-prj/structGAN/structGAN/1_output_shearwall
-
+  #梁板
   beaminpicpath: /data/java-prj/structGAN/structGAN/2_input_beam/architecture
   beamintxtpath: /data/java-prj/structGAN/structGAN/2_input_beam/config
   beamoutpicpath: /data/java-prj/structGAN/structGAN/2_output_beam
@@ -56,13 +56,17 @@ Windows:
   intxtpath: C:\Users\Myux\Desktop\local\1_input_shearwall\config
   wallpypath: C:\Users\Myux\Desktop\local\StructGAN_p1_wall_20220117.py
   outpath: C:\Users\Myux\Desktop\local\1_output_shearwall
-
+  #梁板
+  #上传建筑空间图纸照片
   beaminpicpath: C:\Users\COCI\Desktop\local\2_input_beam\architecture
-  beamintxtpath: C:\Users\COCI\Desktop\local\2_input_beam\config
+  #上传剪力墙结构图纸照片
+  wallinpicpath: C:\Users\COCI\Desktop\local\2_input_beam\structure
+  #输出梁板图片
   beamoutpicpath: C:\Users\COCI\Desktop\local\2_output_beam
+  #输出梁板TXT
   beamouttxtpath: C:\Users\COCI\Desktop\local\2_output_beam
+  #梁板算法
   beampypath: C:\Users\COCI\Desktop\local\StructGAN_p2_beam_20220117.py
-  beamoutpath: C:\Users\COCI\Desktop\local\2_output_beam
 # uucs用户中心配置
 user-center:
   # 互联网地址

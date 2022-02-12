@@ -26,12 +26,9 @@ public class BeamUploadService {
 //    @Value("${Windows.beaminpicpath}")
 //    private String beaminpicpath;
 //
-//    @Value("${Windows.beamintxtpath}")
-//    private String beamintxtpath;
+//    @Value("${Windows.wallinpicpath}")
+//    private String wallinpicpath;
 //
-//    @Value("${Windows.beamoutpath}")
-//    private String beamoutpath;
-
 //    @Value("${Windows.beamoutpicpath}")
 //    private String beamoutpicpath;
 //
@@ -40,52 +37,60 @@ public class BeamUploadService {
 
     @Value("${Linux.beaminpicpath}")
     private String beaminpicpath;
+    @Value("${Linux.beaminpicpathurl}")
+    private String beaminpicpathurl;
 
-    @Value("${Linux.beamintxtpath}")
-    private String beamintxtpath;
+    @Value("${Linux.wallinpicpath}")
+    private String wallinpicpath;
+    @Value("${Linux.wallinpicpathurl}")
+    private String wallinpicpathurl;
 
     @Value("${Linux.beamoutpath}")
     private String beamoutpath;
+    @Value("${Linux.beamoutpathurl}")
+    private String beamoutpathurl;
 
-    @Value("${Linux.beamoutpicpath}")
-    private String beamoutpicpath;
-
-    @Value("${Linux.beamouttxtpath}")
-    private String beamouttxtpath;
 
     Date date = new Date();
     SimpleDateFormat dateFormat= new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
 
 
-    public int transformBeam(MultipartFile file, String username, String beamDesignType, String beamLong, String beamUp, String beamLow, String prjname) {
-        String fileName = file.getOriginalFilename();
-        fileName = getFileName(fileName);
+    public int transformBeam(MultipartFile file1,String prjName, String username, String beamDesignType, String beamLong, String beamUp, String beamLow, String prjname) {
+        //建筑空间照片文件名称
+        String fileName1 = file1.getOriginalFilename();
+
+        fileName1 = getFileName(fileName1);
         try {
-            if (!file.isEmpty()) {
+            if (!file1.isEmpty()) {
                 //上传图片 我也不知道这个try为啥这样写 但是能跑别改
-                try (BufferedOutputStream out = new BufferedOutputStream(
-                        new FileOutputStream((beamoutpicpath + File.separator + fileName))))
+                try (BufferedOutputStream out1 = new BufferedOutputStream(
+                        new FileOutputStream((beaminpicpathurl + File.separator + fileName1))))
                 {
-                    out.write(file.getBytes());
-                    out.flush();
-                    out.close();
+                    out1.write(file1.getBytes());
+                    out1.flush();
+                    out1.close();
                     //生成txt参数文件
                     //txt文件内坐标如何来的？？？
                     //TODO
                     String txt = beamDesignType+", "+beamLong+", "+beamUp+","+beamLow;
-                    String txtFileName = fileName.replace(".png",".txt");
-                    File txtfile = new File(beamouttxtpath + File.separator + txtFileName);
+                    String txtFileName = fileName1.replace(".png",".png.txt");
+                    File txtfile = new File(beaminpicpathurl + File.separator + txtFileName);
                     FileWriter fw = new FileWriter(txtfile);
                     fw.write(txt);
                     fw.close();
                     //数据库添加信息
-                    String outPngPath = beamoutpicpath + File.separator + fileName;
-                    String outTxtPath = beamouttxtpath + File.separator + txtFileName;
+                    String outBeamPngPath = beamoutpathurl + File.separator + fileName1;
                     BeamTransformInfo beamTransformInfo = new BeamTransformInfo();
-                    beamTransformInfo.setWallUploadTime(date);
-                    beamTransformInfo.setWallOutPngUrl(outPngPath);
-                    beamTransformInfo.setWallOutTxtUrl(outTxtPath);
-                    beamUploadMapper.insertBeamOfWall(beamTransformInfo);
+                    beamTransformInfo.setBeamUploadTime(date);
+                    beamTransformInfo.setPrjName(prjName);
+//                    beamTransformInfo.setWallUploadTime(date);
+//                    beamTransformInfo.setWallOutPngUrl(outWallPngPath);
+                    beamTransformInfo.setBeamInPngUrl(outBeamPngPath);
+                    beamTransformInfo.setTxtFileName(txtFileName);
+                    beamTransformInfo.setPngFileName(fileName1);
+                    beamTransformInfo.setUserName(username);
+                    //beamTransformInfo.setWallOutTxtUrl(outTxtPath);
+                    beamUploadMapper.insertBeamAndWall(beamTransformInfo);
                     //日志
                     UserLog userLog = new UserLog();
                     userLog.setUsername(username);
@@ -118,35 +123,40 @@ public class BeamUploadService {
         return fileName;
     }
 
-    public int uploadWall(MultipartFile file, String username) {
-        String fileName = file.getOriginalFilename();
-        fileName = getFileName(fileName);
+    /**
+     * 上传剪力墙照片
+     */
+    public int uploadWall(MultipartFile file1, String username) {
+        //剪力墙照片文件名称
+        String fileName1 = file1.getOriginalFilename();
+        fileName1 = getFileName(fileName1);
         try {
-            if (!file.isEmpty()) {
+            if (!file1.isEmpty()) {
                 //上传图片 我也不知道这个try为啥这样写 但是能跑别改
-                try (BufferedOutputStream out = new BufferedOutputStream(
-                        new FileOutputStream((beamoutpath + File.separator + fileName))))
+                try (BufferedOutputStream out1 = new BufferedOutputStream(
+                        new FileOutputStream((wallinpicpath + File.separator + fileName1))))
                 {
-                    out.write(file.getBytes());
-                    out.flush();
-                    out.close();
+                    out1.write(file1.getBytes());
+                    out1.flush();
+                    out1.close();
                     //生成txt参数文件
                     //txt文件内坐标如何来的？？？
                     //TODO
-                    //String txt = beamDesignType+", "+beamLong+", "+beamUp+","+beamLow;
-                    String txtFileName = fileName.replace(".png",".txt");
-                    /*File txtfile = new File(beamintxtpath + File.separator + txtFileName);
-                    FileWriter fw = new FileWriter(txtfile);
-                    fw.write(txt);
-                    fw.close();*/
+//                    String txt = beamDesignType+", "+beamLong+", "+beamUp+","+beamLow;
+//                    String txtFileName = fileName1.replace(".png",".txt");
+//                    File txtfile = new File(beamouttxtpath + File.separator + txtFileName);
+//                    FileWriter fw = new FileWriter(txtfile);
+//                    fw.write(txt);
+//                    fw.close();
                     //数据库添加信息
-                    String outPngPath = beamoutpicpath + File.separator + fileName;
-                    String outTxtPath = beamouttxtpath + File.separator + txtFileName;
+                    String outWallPngPath = wallinpicpath + File.separator + fileName1;
                     BeamTransformInfo beamTransformInfo = new BeamTransformInfo();
+//                    beamTransformInfo.setBeamUploadTime(date);
                     beamTransformInfo.setWallUploadTime(date);
-                    beamTransformInfo.setWallOutPngUrl(outPngPath);
-                    beamTransformInfo.setWallOutTxtUrl(outTxtPath);
-                    beamUploadMapper.insertSelective(beamTransformInfo);
+                    beamTransformInfo.setWallOutPngUrl(outWallPngPath);
+//                    beamTransformInfo.setPngFileName(fileName1);
+                    //beamTransformInfo.setWallOutTxtUrl(outTxtPath);
+                    beamUploadMapper.insertWall(beamTransformInfo);
                     //日志
                     UserLog userLog = new UserLog();
                     userLog.setUsername(username);

@@ -8,13 +8,10 @@
     <result column="prj_name" jdbcType="VARCHAR" property="prjName" />
     <result column="prj_status" jdbcType="VARCHAR" property="prjStatus" />
     <result column="wall_out_png_url" jdbcType="VARCHAR" property="wallOutPngUrl" />
-    <result column="wall_out_txt_url" jdbcType="VARCHAR" property="wallOutTxtUrl" />
-    <result column="beam_in_txt_url" jdbcType="VARCHAR" property="beamInTxtUrl" />
     <result column="beam_in_png_url" jdbcType="VARCHAR" property="beamInPngUrl" />
     <result column="beam_out_txt_url" jdbcType="VARCHAR" property="beamOutTxtUrl" />
     <result column="beam_out_png_url" jdbcType="VARCHAR" property="beamOutPngUrl" />
-    <result column="beam_upload_time" jdbcType="TIMESTAMP" property="beamUploadTime" />
-    <result column="wall_upload_time" jdbcType="TIMESTAMP" property="wallUploadTime" />
+    <result column="upload_time" jdbcType="TIMESTAMP" property="beamUploadTime" />
     <result column="transform_time" jdbcType="TIMESTAMP" property="transformTime" />
     <result column="txt_file_name" jdbcType="VARCHAR" property="txtFileName" />
     <result column="png_file_name" jdbcType="VARCHAR" property="pngFileName" />
@@ -26,13 +23,10 @@
             prj_name,
             prj_status,
             wall_out_png_url,
-            wall_out_txt_url,
-            beam_in_txt_url,
             beam_in_png_url,
             beam_out_txt_url,
             beam_out_png_url,
-            beam_upload_time,
-            wall_upload_time,
+            upload_time,
             transform_time,
             txt_file_name,
             png_file_name,

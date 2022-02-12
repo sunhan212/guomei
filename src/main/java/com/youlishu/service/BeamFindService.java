@@ -1,6 +1,7 @@
 package com.youlishu.service;
 
 
+import com.github.pagehelper.Page;
 import com.youlishu.bean.BeamTransformInfo;
 import com.youlishu.dao.BeamFindMapper;
 import org.springframework.beans.factory.annotation.Autowired;

@@ -55,6 +55,24 @@ Linux:
 #脚本地址
   wallpypath: /data/docker/nginx/data/html/structGAN/StructGAN_p1_wall_20220117.py
 
+  #---------------------------------------------------------------------
+  #剪力墙上传图片服务器地址
+  wallinpicpath: /data/java-prj/structGAN/structGAN/2_input_beam/structure/
+  #剪力墙上传地址
+  wallinpicpathurl: http://101.43.179.180:18080/structGAN/2_input_beam/structure/
+  #建筑空间上传图片服务器地址
+  beaminpicpath: /data/java-prj/structGAN/structGAN/2_input_beam/architecture/
+  #建筑空间 上传地址
+  beaminpicpathurl: http://101.43.179.180:18080/structGAN/2_input_beam/architecture/
+  #输出梁板服务器地址
+  beamoutpath: /data/java-prj/structGAN/structGAN/2_output_beam/
+  #输出梁板地址
+  beamoutpathurl: http://101.43.179.180:18080/structGAN/2_output_beam/
+  #下载地址
+  beamdownload: /data/java-prj/structGAN/structGAN/2_output_beam/
+  #脚本地址
+  beampypath: /data/docker/nginx/data/html/structGAN/StructGAN_p2_beam_20220117.py
+
 # uucs用户中心配置
 user-center:
   # 互联网地址

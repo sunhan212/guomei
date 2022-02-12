@@ -26,17 +26,9 @@ public class BeamTransformInfo implements Serializable {
      */
     private String prjStatus;
     /**
-     *剪力墙输出的txt参数地址
-     */
-    private String wallOutTxtUrl;
-    /**
      *剪力墙输出的png参数地址
      */
     private String wallOutPngUrl;
-    /**
-     *梁板构建输入的txt参数地址
-     */
-    private String beamInTxtUrl;
     /**
      *梁板构建输入的png参数地址
      */
