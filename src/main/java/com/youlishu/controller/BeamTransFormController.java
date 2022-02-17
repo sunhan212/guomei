@@ -50,13 +50,13 @@ public class BeamTransFormController {
      */
     @ApiOperation(value = "进行梁板构建算法转换", notes = "根据项目名称进行转换")
     @ApiImplicitParams({
-            @ApiImplicitParam(name = "prjname", value = "项目名称", required = true, dataType = "Param"),
+            @ApiImplicitParam(name = "prjName", value = "项目名称", required = true, dataType = "Param"),
             @ApiImplicitParam(name = "token", value = "验证码", required = true, dataType = "header"),
             @ApiImplicitParam(name = "username", value = "用户名", required = true, dataType = "header")
     })
     @GetMapping("/inbeam")
-    private ResponseBean transformBeam(String prjname , HttpServletRequest request){
-        //服务器地址
+    private ResponseBean transformBeam(String prjName , HttpServletRequest request){
+        //服务器运行python脚本，这一步其实会把所有的文件都转换了，但是数据库不落入信息，用户也看不到
         String arguments = "python3 /data/java-prj/structGAN/structGAN/StructGAN_p2_beam_20220117.py";
         //本地
         //String[] arguments = {"C:\\Users\\COCI\\Desktop\\local", "\\StructGAN_p2_beam_20220117.py"};
@@ -76,7 +76,7 @@ public class BeamTransFormController {
             //服务器命令执行成功只能是0，其他都是失败
             int re = proc.waitFor();
             if (re == 0){
-                int a = beamTransformService.uploadBeamTransformInfo(prjname,username);
+                int a = beamTransformService.uploadBeamTransformInfo(prjName,username);
                 if (a == 1){
                     return new ResponseBean(200,"转换成功","成功");
                 }else {
@@ -84,6 +84,7 @@ public class BeamTransFormController {
                 }
             }
             else{
+                System.out.println(re);
                 return new ResponseBean(501, "算法转换失败", re+result);
             }
         } catch (Exception e) {

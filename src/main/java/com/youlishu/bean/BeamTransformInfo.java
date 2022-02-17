@@ -34,6 +34,10 @@ public class BeamTransformInfo implements Serializable {
      */
     private String beamInPngUrl;
     /**
+     *梁板构建输入的参数地址
+     */
+    private String beamInTxtUrl;
+    /**
      *梁板构建输出的txt参数地址
      */
     private String beamOutTxtUrl;

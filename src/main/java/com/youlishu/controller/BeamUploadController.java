@@ -8,6 +8,7 @@ import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
 import org.apache.catalina.servlet4preview.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -29,11 +30,13 @@ public class BeamUploadController {
 
     /**
      * 上传需要转换的图片和txt参数
+     * 从这开始
      */
-    @GetMapping("/uploadBeam")
+    @RequestMapping(value = "/uploadBeam",method = RequestMethod.POST,consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
     @ApiOperation(value = "上传转换数据", notes = "上传转换梁板需要的图片及参数")
     @ApiImplicitParams({
-            @ApiImplicitParam(name = "file1", value = "建筑空间png图片", required = true, dataType = "Param"),
+            @ApiImplicitParam(name = "file", value = "建筑空间png图片", required = true, dataType = "Param"),
+            @ApiImplicitParam(name = "file", value = "剪力墙png图片", required = true, dataType = "Param"),
             @ApiImplicitParam(name = "prjName", value = "建筑空间png图片", required = true, dataType = "Param"),
             @ApiImplicitParam(name = "beamDesignType", value = "梁构建设计方式", required = true, dataType = "Param"),
             @ApiImplicitParam(name = "beamLong", value = "连梁与框架梁分界线长度", required = true, dataType = "Param"),
@@ -42,17 +45,17 @@ public class BeamUploadController {
             @ApiImplicitParam(name = "token", value = "验证码", required = true, dataType = "header"),
             @ApiImplicitParam(name = "username", value = "用户名", required = true, dataType = "header")
     })
-    private ResponseBean transformBeam(@RequestParam("file") MultipartFile file1,
+    private ResponseBean transformBeam(@RequestParam("file1") MultipartFile file1,
+                                       @RequestParam("file2") MultipartFile file2,
                                        @RequestParam(required = false) String prjName,
                                        @RequestParam(required = false)String beamDesignType,
                                        @RequestParam(required = false)String beamLong,
                                        @RequestParam(required = false)String beamUp,
-                                       @RequestParam(required = false)String beamLow,
-                                       @RequestParam(required = false)String prjname, HttpServletRequest request){
+                                       @RequestParam(required = false)String beamLow, HttpServletRequest request){
         try {
             String username = request.getHeader("username");
 
-            int a = beamUploadService.transformBeam(file1,prjName,username,beamDesignType,beamLong,beamUp,beamLow,prjname);
+            int a = beamUploadService.transformBeam(file1,file2,prjName,username,beamDesignType,beamLong,beamUp,beamLow);
             if (a == 1) {
                 return new ResponseBean(200,"上传成功",null);
             }else {
@@ -70,7 +73,7 @@ public class BeamUploadController {
      *@Date  2022/02/11 17:21
      *Exception
      */
-    @GetMapping("/uploadWall")
+    @RequestMapping(value = "/uploadWall",method = RequestMethod.POST,consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
     @ApiOperation(value = "上传转换数据", notes = "上传转换梁板需要的剪力墙图片及参数")
     @ApiImplicitParams({
             @ApiImplicitParam(name = "file1", value = "剪力墙png图片", required = true, dataType = "Param"),
