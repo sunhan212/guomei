@@ -65,6 +65,19 @@ public class WallTransformInfo {
      * 项目名称
      */
     private String prjName;
+    /**
+     * 抗震设防烈度
+     */
+    private String seismic;
+    /**
+     * 建筑结构高度
+     */
+    private String structure;
+    /**
+     * 比例尺
+     */
+    private String scale;
+
 
     public Integer getId() {
         return id;
@@ -152,5 +165,29 @@ public class WallTransformInfo {
 
     public void setPrjName(String prjName) {
         this.prjName = prjName;
+    }
+
+    public String getSeismic() {
+        return seismic;
+    }
+
+    public void setSeismic(String seismic) {
+        this.seismic = seismic;
+    }
+
+    public String getStructure() {
+        return structure;
+    }
+
+    public void setStructure(String structure) {
+        this.structure = structure;
+    }
+
+    public String getScale() {
+        return scale;
+    }
+
+    public void setScale(String scale) {
+        this.scale = scale;
     }
 }

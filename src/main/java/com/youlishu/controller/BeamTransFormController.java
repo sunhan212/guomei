@@ -23,7 +23,6 @@ import java.io.InputStreamReader;
  *@Author   kd
  *@Date  2022/01/26 11:16
  *Exception
- *
  */
 @CrossOrigin
 @RestController
@@ -57,16 +56,12 @@ public class BeamTransFormController {
     @GetMapping("/inbeam")
     private ResponseBean transformBeam(String prjName , HttpServletRequest request){
         //服务器运行python脚本，这一步其实会把所有的文件都转换了，但是数据库不落入信息，用户也看不到
-        String arguments = "python3 /data/java-prj/structGAN/structGAN/StructGAN_p2_beam_20220117.py";
-        //本地
-        //String[] arguments = {"C:\\Users\\COCI\\Desktop\\local", "\\StructGAN_p2_beam_20220117.py"};
-        //String[] arguments = new String[] {"python", beampypath};
+        String arguments = "python3 /data/java-prj/structGAN/structGAN/StructGAN_p2_beam_20220221.py";
         String username = request.getHeader("username");
         Process proc;
         try {
             proc = Runtime.getRuntime().exec(arguments);
-
-            BufferedReader in = new BufferedReader(new InputStreamReader(proc.getInputStream()));
+             BufferedReader in = new BufferedReader(new InputStreamReader(proc.getInputStream()));
             String result = in.readLine();
             String line = null;
             while ((line = in.readLine()) != null) {

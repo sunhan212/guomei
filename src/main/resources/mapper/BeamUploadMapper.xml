@@ -18,6 +18,10 @@
     <result column="txt_file_name" jdbcType="VARCHAR" property="txtFileName" />
     <result column="png_file_name" jdbcType="VARCHAR" property="pngFileName" />
     <result column="user_name" jdbcType="VARCHAR" property="userName" />
+    <result column="beam_low" jdbcType="VARCHAR" property="beamLow" />
+    <result column="beam_long" jdbcType="VARCHAR" property="beamLong" />
+    <result column="beam_up" jdbcType="VARCHAR" property="beamUp" />
+    <result column="beam_design_type" jdbcType="VARCHAR" property="beamDesignType" />
 
   </resultMap>
   <sql id="Base_Column_List">
@@ -35,7 +39,11 @@
     transform_time,
     txt_file_name,
     png_file_name,
-    user_name
+    user_name,
+    beam_low,
+    beam_long,
+    beam_up,
+    beam_design_type
   </sql>
 
 
@@ -71,6 +79,18 @@
       <if test="userName != null">
         user_name,
       </if>
+      <if test="beamUp != null">
+        beam_up,
+      </if>
+      <if test="beamLong != null">
+        beam_long,
+      </if>
+      <if test="beamLow != null">
+        beam_low,
+      </if>
+      <if test="beamDesignType != null">
+        beam_design_type,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
       <if test="prjName != null">
@@ -99,6 +119,18 @@
       </if>
       <if test="userName != null">
         #{userName,jdbcType=VARCHAR},
+      </if>
+      <if test="beamUp != null">
+        #{beamUp,jdbcType=VARCHAR},
+      </if>
+      <if test="beamLong != null">
+        #{beamLong,jdbcType=VARCHAR},
+      </if>
+      <if test="beamLow != null">
+        #{beamLow,jdbcType=VARCHAR},
+      </if>
+      <if test="beamDesignType != null">
+        #{beamDesignType,jdbcType=VARCHAR},
       </if>
     </trim>
   </insert>

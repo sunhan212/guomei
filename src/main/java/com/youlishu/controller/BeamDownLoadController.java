@@ -7,10 +7,7 @@ import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
 import org.apache.catalina.servlet4preview.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletResponse;
 import java.io.*;
@@ -29,11 +26,12 @@ public class BeamDownLoadController {
 
     @Value("${Linux.beamdownloadurl}")
     private String beamdownloadurl;
-    /**
+    @Value("${Linux.beamdownload}")
+    private String beamdownload;/**
      * @function 下载
      * @params
      **/
-    @RequestMapping(value = "/beamfile")
+    @RequestMapping(value = "/beamfile",method = RequestMethod.POST)
     @ResponseBody
     @ApiOperation(value = "下载", notes = "根据文件名下载结果文件")
     @ApiImplicitParams({
@@ -54,7 +52,7 @@ public class BeamDownLoadController {
 
             //获取文件的路径 url从配置文件中获取
 
-            String filePath = (beamdownloadurl + File.separator + fileName);
+            String filePath = (beamdownload + File.separator + fileName);
             FileInputStream input = new FileInputStream(filePath);
             OutputStream out = response.getOutputStream();
             byte[] b = new byte[20*2048];

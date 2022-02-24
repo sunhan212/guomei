@@ -14,15 +14,8 @@ import org.springframework.stereotype.Repository;
 @Mapper
 @Repository
 public interface WallTransformInfoMapper {
-    int deleteByPrimaryKey(Integer id);
-
-    int insert(WallTransformInfo record);
 
     int insertSelective(WallTransformInfo record);
-
-    WallTransformInfo selectByPrimaryKey(Integer id);
-
-    int updateByPrimaryKeySelective(WallTransformInfo record);
 
     int update(WallTransformInfo record);
 
@@ -30,5 +23,9 @@ public interface WallTransformInfoMapper {
 
     WallTransformInfo getinfo(@Param("username") String username,@Param("prjname") String prjname);
 
-    int insertoutinfo(WallTransformInfo record);
+    WallTransformInfo  findOneWall(@Param("id") Integer id, @Param("username") String username);
+
+    int  updateWall(WallTransformInfo wallTransformInfo);
+
+    int deleteWall(@Param("id") Integer id, @Param("username") String username);
 }

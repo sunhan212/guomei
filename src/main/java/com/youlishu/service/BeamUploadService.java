@@ -84,15 +84,18 @@ public class BeamUploadService {
                     out2.close();
                     //生成txt参数文件
                     //TODO
-                    String txt = beamDesignType+", "+beamLong+", "+beamUp+", "+beamLow;
-                    String txtFileName = fileName1.replace(".png",".png.txt");
+                    String txt = beamDesignType+","+beamLong+","+beamUp+","+beamLow;
+                    String txtFileName = fileName1.replace(".png",".txt");
                     File txtfile = new File(beamintxtpath + File.separator + txtFileName);
                     FileWriter fw = new FileWriter(txtfile);
                     fw.write(txt);
                     fw.close();
                     //数据库添加信息
+                    //输出上传参数TXT文件地址
                     String beamInTxtPath = beamintxtpathurl + fileName1.replace(".png",".txt");
+                    //输出上传建筑空间照片地址
                     String outBeamPngPath = beaminpicpathurl + File.separator + fileName1;
+                    //输出上传剪力墙照片地址
                     String outWallPngPath = wallinpicpathurl + File.separator + fileName2;
                     BeamTransformInfo beamTransformInfo = new BeamTransformInfo();
                     beamTransformInfo.setBeamUploadTime(date);
@@ -104,6 +107,10 @@ public class BeamUploadService {
                     beamTransformInfo.setTxtFileName(txtFileName);
                     beamTransformInfo.setPngFileName(fileName1);
                     beamTransformInfo.setUserName(username);
+                    beamTransformInfo.setBeamDesignType(beamDesignType);
+                    beamTransformInfo.setBeamLong(beamLong);
+                    beamTransformInfo.setBeamLow(beamLow);
+                    beamTransformInfo.setBeamUp(beamUp);
                     beamUploadMapper.insertBeamAndWall(beamTransformInfo);
                     //日志
                     UserLog userLog = new UserLog();

@@ -37,6 +37,7 @@ public class UploadController {
             @ApiImplicitParam(name = "seismic", value = "抗震设防烈度", required = true, dataType = "Param"),
             @ApiImplicitParam(name = "structure", value = "建筑结构高度", required = true, dataType = "Param"),
             @ApiImplicitParam(name = "scale", value = "比例尺", required = true, dataType = "Param"),
+            @ApiImplicitParam(name = "prjName", value = "项目名称", required = true, dataType = "Param"),
             @ApiImplicitParam(name = "token", value = "验证码", required = true, dataType = "header"),
             @ApiImplicitParam(name = "username", value = "用户名", required = true, dataType = "header")
     })
@@ -44,11 +45,11 @@ public class UploadController {
                                        @RequestParam(required = false)String seismic,
                                        @RequestParam(required = false)String structure,
                                        @RequestParam(required = false)String scale,
-                                       @RequestParam(required = false)String prjname,HttpServletRequest request){
+                                       @RequestParam(required = false)String prjName,HttpServletRequest request){
         try {
             String username = request.getHeader("username");
 
-            String a = transformWallService.transformwall(file,username,seismic,structure,scale,prjname);
+            String a = transformWallService.transformwall(file,username,seismic,structure,scale,prjName);
             if (a == "1") {
                 return new ResponseBean(200,"上传成功","成功");
             }else {

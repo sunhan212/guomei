@@ -77,7 +77,19 @@ Linux:
   #下载地址
   beamdownloadurl: http://101.43.179.180:18080/structGAN/2_output_beam/
   #脚本地址
-  beampypath: /data/docker/nginx/data/html/structGAN/StructGAN_p2_beam_20220117.py
+  beampypath: /data/docker/nginx/data/html/structGAN/StructGAN_p2_beam_20220221.py
+
+#Windows:
+#  #上传建筑空间图纸照片
+#  beaminpicpath: C:\Users\COCI\Desktop\local\2_input_beam\architecture
+#  #上传剪力墙结构图纸照片
+#  wallinpicpath: C:\Users\COCI\Desktop\local\2_input_beam\structure
+#  #上传建筑空间图纸照片
+#  beaminpicpath: C:\Users\COCI\Desktop\local\2_input_beam\config
+#  #输出梁板图片
+#  beamoutpath: C:\Users\COCI\Desktop\local\2_output_beam
+#  #梁板算法
+#  beampypath: C:\Users\COCI\Desktop\local\StructGAN_p2_beam_20220117.py
 
 # uucs用户中心配置
 user-center:

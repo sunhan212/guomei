@@ -35,8 +35,8 @@ public class BeamUploadController {
     @RequestMapping(value = "/uploadBeam",method = RequestMethod.POST,consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
     @ApiOperation(value = "上传转换数据", notes = "上传转换梁板需要的图片及参数")
     @ApiImplicitParams({
-            @ApiImplicitParam(name = "file", value = "建筑空间png图片", required = true, dataType = "Param"),
-            @ApiImplicitParam(name = "file", value = "剪力墙png图片", required = true, dataType = "Param"),
+            @ApiImplicitParam(name = "file1", value = "建筑空间png图片", required = true, dataType = "Param"),
+            @ApiImplicitParam(name = "file2", value = "剪力墙png图片", required = true, dataType = "Param"),
             @ApiImplicitParam(name = "prjName", value = "建筑空间png图片", required = true, dataType = "Param"),
             @ApiImplicitParam(name = "beamDesignType", value = "梁构建设计方式", required = true, dataType = "Param"),
             @ApiImplicitParam(name = "beamLong", value = "连梁与框架梁分界线长度", required = true, dataType = "Param"),

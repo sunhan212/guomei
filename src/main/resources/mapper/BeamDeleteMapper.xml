@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.youlishu.dao.BeamFindMapper">
+<mapper namespace="com.youlishu.dao.BeamDeleteMapper">
     <resultMap id="BaseResultMap" type="com.youlishu.bean.BeamTransformInfo">
         <!--@mbg.generated-->
         <!--@Table wall_transform_info-->
@@ -18,10 +18,6 @@
         <result column="txt_file_name" jdbcType="VARCHAR" property="txtFileName" />
         <result column="png_file_name" jdbcType="VARCHAR" property="pngFileName" />
         <result column="user_name" jdbcType="VARCHAR" property="userName" />
-        <result column="beam_design_type" jdbcType="VARCHAR" property="beamDesignType" />
-        <result column="beam_up" jdbcType="VARCHAR" property="beamUp" />
-        <result column="beam_long" jdbcType="VARCHAR" property="beamLong" />
-        <result column="beam_low" jdbcType="VARCHAR" property="beamLow" />
 
     </resultMap>
     <sql id="Base_Column_List">
@@ -39,35 +35,16 @@
         transform_time,
         txt_file_name,
         png_file_name,
-        user_name,
-        beam_design_type,
-        beam_up,
-        beam_long,
-        beam_low
+        user_name
     </sql>
-  <!--查询梁板数据列表-->
-  <select id="findBeamInfo" resultMap="BaseResultMap">
-    SELECT  id,
-            prj_name,
-            prj_status,
-            wall_out_png_url,
-            beam_in_png_url,
-            beam_in_txt_url,
-            beam_out_txt_url,
-            beam_out_png_url,
-            wall_upload_time,
-            beam_upload_time,
-            transform_time,
-            txt_file_name,
-            png_file_name,
-            user_name,
-            beam_design_type,
-            beam_up,
-            beam_long,
-            beam_low
-    FROM beam_transform_info
-    WHERE user_name = #{userName}
-    ORDER BY transform_time DESC
-  </select>
+  <!--查看单个梁板数据列表-->
+    <select id="findOneBeam" resultType="com.youlishu.bean.BeamTransformInfo">
+        select * from beam_transform_info where id = #{id} and user_name = #{username}
+    </select>
+
+    <delete id="deleteBeam" >
+        delete from beam_transform_info where id = #{id} and user_name = #{username}
+    </delete>
+
 
 </mapper>

@@ -14,7 +14,7 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
 @EnableScheduling
 @EnableSwagger2
 @MapperScan({"com.youlishu.dao"})
-@SpringBootApplication
+@SpringBootApplication(scanBasePackages ={"com.youlishu"} )
 public class AppApplication {
 
 	public static void main(String[] args) {

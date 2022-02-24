@@ -61,16 +61,18 @@ public class BeamTransformService {
             //先找到文件名
             BeamTransformInfo info = beamTransformMapper.getinfo(username,prjName);
             //生成查看输出图片的地址
-            String outpngurl = beamoutpathurl+ File.separator+info.getPngFileName();
+            String outpngurl = beamoutpathurl + info.getPngFileName();
+            System.out.println(outpngurl);
             //生成查看输出文本的地址
-            String outtxturl = beamoutpathurl+File.separator+info.getTxtFileName();
+            String outtxturl = beamoutpathurl + info.getTxtFileName();
+            System.out.println(outtxturl);
             //String outtxturl = deouttxturl.replace(".txt",".png.txt");
             BeamTransformInfo transinfo = new BeamTransformInfo();
             transinfo.setBeamOutPngUrl(outpngurl);
             transinfo.setBeamOutTxtUrl(outtxturl);
             transinfo.setTransformTime(date);
-            //transinfo.setUserName(username);
-            //transinfo.setPrjName(prjName);
+            transinfo.setUserName(username);
+            transinfo.setPrjName(prjName);
             beamTransformMapper.update(transinfo);
 
         }catch (Exception e) {
