@@ -23,37 +23,38 @@ public class BeamUploadService {
     @Autowired
     private UserLogMapper userLogMapper;
 
-//    @Value("${Windows.beaminpicpath}")
+
+//    @Value("${Linux.beaminpicpath}")
 //    private String beaminpicpath;
+//    @Value("${Linux.beaminpicpathurl}")
+//    private String beaminpicpathurl;
 //
-//    @Value("${Windows.wallinpicpath}")
+//    @Value("${Linux.beamintxtpath}")
+//    private String beamintxtpath;
+//    @Value("${Linux.beamintxtpathurl}")
+//    private String beamintxtpathurl;
+//
+//    @Value("${Linux.wallinpicpath}")
 //    private String wallinpicpath;
+//    @Value("${Linux.wallinpicpathurl}")
+//    private String wallinpicpathurl;
 //
-//    @Value("${Windows.beamoutpicpath}")
-//    private String beamoutpicpath;
-//
-//    @Value("${Windows.beamouttxtpath}")
-//    private String beamouttxtpath;
+//    @Value("${Linux.beamoutpath}")
+//    private String beamoutpath;
+//    @Value("${Linux.beamoutpathurl}")
+//    private String beamoutpathurl;
 
-    @Value("${Linux.beaminpicpath}")
+    @Value("${Windows.beaminpicpath}")
     private String beaminpicpath;
-    @Value("${Linux.beaminpicpathurl}")
-    private String beaminpicpathurl;
 
-    @Value("${Linux.beamintxtpath}")
+    @Value("${Windows.beamintxtpath}")
     private String beamintxtpath;
-    @Value("${Linux.beamintxtpathurl}")
-    private String beamintxtpathurl;
 
-    @Value("${Linux.wallinpicpath}")
+    @Value("${Windows.wallinpicpath}")
     private String wallinpicpath;
-    @Value("${Linux.wallinpicpathurl}")
-    private String wallinpicpathurl;
 
-    @Value("${Linux.beamoutpath}")
+    @Value("${Windows.beamoutpath}")
     private String beamoutpath;
-    @Value("${Linux.beamoutpathurl}")
-    private String beamoutpathurl;
 
 
     Date date = new Date();
@@ -92,11 +93,11 @@ public class BeamUploadService {
                     fw.close();
                     //数据库添加信息
                     //输出上传参数TXT文件地址
-                    String beamInTxtPath = beamintxtpathurl + fileName1.replace(".png",".txt");
+                    String beamInTxtPath = beamintxtpath + fileName1.replace(".png",".txt");
                     //输出上传建筑空间照片地址
-                    String outBeamPngPath = beaminpicpathurl + File.separator + fileName1;
+                    String outBeamPngPath = beaminpicpath + File.separator + fileName1;
                     //输出上传剪力墙照片地址
-                    String outWallPngPath = wallinpicpathurl + File.separator + fileName2;
+                    String outWallPngPath = wallinpicpath + File.separator + fileName2;
                     BeamTransformInfo beamTransformInfo = new BeamTransformInfo();
                     beamTransformInfo.setBeamUploadTime(date);
                     beamTransformInfo.setPrjName(prjName);
@@ -154,7 +155,7 @@ public class BeamUploadService {
             if (!file1.isEmpty()) {
                 //上传图片 我也不知道这个try为啥这样写 但是能跑别改
                 try (BufferedOutputStream out1 = new BufferedOutputStream(
-                        new FileOutputStream((wallinpicpathurl + File.separator + fileName1))))
+                        new FileOutputStream((wallinpicpath + File.separator + fileName1))))
                 {
                     out1.write(file1.getBytes());
                     out1.flush();
@@ -169,7 +170,7 @@ public class BeamUploadService {
 //                    fw.write(txt);
 //                    fw.close();
                     //数据库添加信息
-                    String outWallPngPath = wallinpicpathurl + File.separator + fileName1;
+                    String outWallPngPath = wallinpicpath + File.separator + fileName1;
                     BeamTransformInfo beamTransformInfo = new BeamTransformInfo();
 //                    beamTransformInfo.setBeamUploadTime(date);
                     beamTransformInfo.setWallUploadTime(date);

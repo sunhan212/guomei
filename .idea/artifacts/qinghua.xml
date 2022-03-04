@@ -1,0 +1,6 @@
+<component name="ArtifactManager">
+  <artifact type="war" name="qinghua">
+    <output-path>$PROJECT_DIR$/out/artifacts/qinghua</output-path>
+    <root id="archive" name="qinghua.war" />
+  </artifact>
+</component>

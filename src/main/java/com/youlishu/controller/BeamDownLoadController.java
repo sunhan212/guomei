@@ -24,10 +24,13 @@ import java.io.*;
 @RequestMapping("/beam/download")
 public class BeamDownLoadController {
 
-    @Value("${Linux.beamdownloadurl}")
-    private String beamdownloadurl;
-    @Value("${Linux.beamdownload}")
-    private String beamdownload;/**
+//    @Value("${Linux.beamdownloadurl}")
+//    private String beamdownloadurl;
+//    @Value("${Linux.beamdownload}")
+//    private String beamdownload;
+    @Value("${Windows.beamdownload}")
+    private String beamdownload;
+    /**
      * @function 下载
      * @params
      **/

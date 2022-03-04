@@ -24,25 +24,30 @@ public class BeamUpdateServiceImpl implements BeamUpdateService {
     @Autowired
     private BeamUpdateMapper beamUpdateMapper;
 
-    @Value("${Linux.beaminpicpath}")
+
+//    @Value("${Linux.beaminpicpath}")
+//    private String beaminpicpath;
+//
+//    @Value("${Linux.beamintxtpath}")
+//    private String beamintxtpath;
+//
+//    @Value("${Linux.wallinpicpath}")
+//    private String wallinpicpath;
+//
+//    @Value("${Linux.beamoutpath}")
+//    private String beamoutpath;
+    
+    @Value("${Windows.beaminpicpath}")
     private String beaminpicpath;
-    @Value("${Linux.beaminpicpathurl}")
-    private String beaminpicpathurl;
 
-    @Value("${Linux.beamintxtpath}")
+    @Value("${Windows.beamintxtpath}")
     private String beamintxtpath;
-    @Value("${Linux.beamintxtpathurl}")
-    private String beamintxtpathurl;
 
-    @Value("${Linux.wallinpicpath}")
+    @Value("${Windows.wallinpicpath}")
     private String wallinpicpath;
-    @Value("${Linux.wallinpicpathurl}")
-    private String wallinpicpathurl;
 
-    @Value("${Linux.beamoutpath}")
+    @Value("${Windows.beamoutpath}")
     private String beamoutpath;
-    @Value("${Linux.beamoutpathurl}")
-    private String beamoutpathurl;
 
     Date date = new Date();
     SimpleDateFormat dateFormat= new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
@@ -95,11 +100,11 @@ public class BeamUpdateServiceImpl implements BeamUpdateService {
                         fw.close();
                         //数据库添加信息
                         //输出上传参数TXT文件地址
-                        String beamInTxtPath = beamintxtpathurl + fileName1.replace(".png", ".txt");
+                        String beamInTxtPath = beamintxtpath + fileName1.replace(".png", ".txt");
                         //输出上传建筑空间照片地址
-                        String outBeamPngPath = beaminpicpathurl + File.separator + fileName1;
+                        String outBeamPngPath = beaminpicpath + File.separator + fileName1;
                         //输出上传剪力墙照片地址
-                        String outWallPngPath = wallinpicpathurl + File.separator + fileName2;
+                        String outWallPngPath = wallinpicpath + File.separator + fileName2;
                         BeamTransformInfo beamTransformInfo1 = new BeamTransformInfo();
                         beamTransformInfo1.setBeamUploadTime(date);
                         beamTransformInfo1.setId(id);

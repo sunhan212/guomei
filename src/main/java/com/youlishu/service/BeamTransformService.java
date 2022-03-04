@@ -20,35 +20,30 @@ public class BeamTransformService {
     @Autowired
     private UserLogMapper userLogMapper;
 
-//    @Value("${Windows.beaminpicpath}")
+
+
+//    @Value("${Linux.beaminpicpath}")
 //    private String beaminpicpath;
+//    @Value("${Linux.beaminpicpathurl}")
+//    private String beaminpicpathurl;
 //
-//    @Value("${Windows.beamoutpicpath}")
-//    private String beamoutpicpath;
+//    @Value("${Linux.wallinpicpath}")
+//    private String wallinpicpath;
+//    @Value("${Linux.wallinpicpathurl}")
+//    private String wallinpicpathurl;
 //
-//    @Value("${Windows.walloutpicpath}")
-//    private String walloutpicpath;
-//
-//    @Value("${Windows.beamouttxtpath}")
-//    private String beamouttxtpath;
-//
-//    @Value("${Windows.beampypath}")
-//    private String beampypath;
-
-    @Value("${Linux.beaminpicpath}")
+//    @Value("${Linux.beamoutpath}")
+//    private String beamoutpath;
+//    @Value("${Linux.beamoutpathurl}")
+//    private String beamoutpathurl;
+    @Value("${Windows.beaminpicpath}")
     private String beaminpicpath;
-    @Value("${Linux.beaminpicpathurl}")
-    private String beaminpicpathurl;
 
-    @Value("${Linux.wallinpicpath}")
+    @Value("${Windows.wallinpicpath}")
     private String wallinpicpath;
-    @Value("${Linux.wallinpicpathurl}")
-    private String wallinpicpathurl;
 
-    @Value("${Linux.beamoutpath}")
+    @Value("${Windows.beamoutpath}")
     private String beamoutpath;
-    @Value("${Linux.beamoutpathurl}")
-    private String beamoutpathurl;
 
 
 
@@ -61,10 +56,10 @@ public class BeamTransformService {
             //先找到文件名
             BeamTransformInfo info = beamTransformMapper.getinfo(username,prjName);
             //生成查看输出图片的地址
-            String outpngurl = beamoutpathurl + info.getPngFileName();
+            String outpngurl = beamoutpath + info.getPngFileName();
             System.out.println(outpngurl);
             //生成查看输出文本的地址
-            String outtxturl = beamoutpathurl + info.getTxtFileName();
+            String outtxturl = beamoutpath + info.getTxtFileName();
             System.out.println(outtxturl);
             //String outtxturl = deouttxturl.replace(".txt",".png.txt");
             BeamTransformInfo transinfo = new BeamTransformInfo();

@@ -47,6 +47,10 @@ public class LoginController {
         }
         return new ResponseBean(500,"用户不存在",null);
     }
+
+
+
+
     @GetMapping("/getusercode")
     @ApiOperation(value = "获取用户信息", notes = "通过UUCS获取的usercode和token传给后台获取信息")
     @ApiImplicitParams({
@@ -67,6 +71,7 @@ public class LoginController {
             map.put("X-Center-Sign",sign);
 
             //获取userinfo
+            //这是调用uucs获取用户信息的   我给你看本地是可以获取到，也可以走这个接口。但是部署在人家服务器上就访问不到后端接口服务了
             String userinfo = HttpClientUtil.get(  userCenterConfig.getBasePath()+userCenterConfig.getUserInfo()+ "?user_code="+user_code+"&check_in=false",map);
             JSONObject userInfoJson = JSONObject.parseObject(userinfo);
             //获取用户信息

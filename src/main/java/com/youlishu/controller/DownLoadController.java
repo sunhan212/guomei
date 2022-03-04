@@ -24,7 +24,9 @@ import java.io.*;
 @RequestMapping("/download")
 public class DownLoadController {
 
-    @Value("${Linux.download}")
+//    @Value("${Linux.download}")
+//    private String download;
+    @Value("${Windows.download}")
     private String download;
     /**
      * @function 下载

@@ -94,7 +94,8 @@ Linux:
 # uucs用户中心配置
 user-center:
   # 互联网地址
-  basePath: https://api.mingyoutang.cn/backend/bj-uucs
+  #basePath: https://api.mingyoutang.cn/backend/bj-uucs
+  basePath: http://172.16.0.236/myt-businesscenter-bj
   # 请求参数
   getTokenParam:
     ## ak

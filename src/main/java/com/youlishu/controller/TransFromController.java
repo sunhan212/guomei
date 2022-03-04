@@ -36,8 +36,8 @@ public class TransFromController {
 //    @Value("${Windows.wallpypath}")
 //    private String wallpypath;
 
-    @Value("${Linux.wallpypath}")
-    private String wallpypath;
+//    @Value("${Linux.wallpypath}")
+//    private String wallpypath;
 
 
 
@@ -56,8 +56,10 @@ public class TransFromController {
     @GetMapping("/inwall")
     private ResponseBean transformWall( String prjname ,HttpServletRequest request){
         //服务器运行python脚本，这一步其实会把所有的文件都转换了，但是数据库不落入信息，用户也看不到
-        String arguments = "python3 /data/java-prj/structGAN/structGAN/StructGAN_p1_wall_20220117.py";
-//        String[] arguments = {"C:\\Users\\Myux\\Desktop\\local", "\\StructGAN_p1_wall_20220117.py"};
+        //String arguments = "python3 /data/java-prj/structGAN/structGAN/StructGAN_p1_wall_20220117.py";
+        //String[] arguments = {"python3" +"C:\\Web_system\\StructGAN_v0\\StructGAN_p1_wall_20220117.py"};
+        //String[] arguments = {"cmd /c"+" python3 C:\\Web_system\\StructGAN_v0\\StructGAN_p1_wall_20220117.py"};
+        String path = "C:/Web_system/StructGAN_v0/StructGAN_p1_wall_20220117.py";
 
         String username = request.getHeader("username");
         Process proc;
@@ -69,7 +71,7 @@ public class TransFromController {
 //            System.out.println(re);
             // 执行py文件
 //            proc = Runtime.getRuntime().exec("python3" + wallpypath);
-            proc = Runtime.getRuntime().exec(arguments);
+            proc = Runtime.getRuntime().exec("cmd /c "+path);
 
             BufferedReader in = new BufferedReader(new InputStreamReader(proc.getInputStream()));
             String result = in.readLine();

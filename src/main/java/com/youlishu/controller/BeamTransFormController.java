@@ -33,11 +33,11 @@ public class BeamTransFormController {
     @Autowired
     private BeamTransformService beamTransformService;
 
-//      @Value("${Windows.beampypath}")
-//      private String beampypath;
+      @Value("${Windows.beampypath}")
+      private String beampypath;
 
-    @Value("${Linux.beampypath}")
-    private String beampypath;
+//    @Value("${Linux.beampypath}")
+//    private String beampypath;
 
 
 
@@ -56,11 +56,20 @@ public class BeamTransFormController {
     @GetMapping("/inbeam")
     private ResponseBean transformBeam(String prjName , HttpServletRequest request){
         //服务器运行python脚本，这一步其实会把所有的文件都转换了，但是数据库不落入信息，用户也看不到
-        String arguments = "python3 /data/java-prj/structGAN/structGAN/StructGAN_p2_beam_20220221.py";
+//        String arguments = "python3 /data/java-prj/structGAN/structGAN/StructGAN_p2_beam_20220221.py";
+        //String[] arguments = {"python3" +"C:\\Web_system\\StructGAN_v0\\StructGAN_p2_beam_20220222.py"};
+        String path = "C:/Web_system/StructGAN_v0/StructGAN_p2_beam_20220222.py";
         String username = request.getHeader("username");
         Process proc;
         try {
-            proc = Runtime.getRuntime().exec(arguments);
+//            Process process = Runtime.getRuntime().exec(arguments);
+//            BufferedReader in = new BufferedReader(new InputStreamReader(process.getInputStream()));
+//            in.close();
+//            int re = process.waitFor();
+//            System.out.println(re);
+            // 执行py文件
+//            proc = Runtime.getRuntime().exec("python3" + wallpypath);
+            proc = Runtime.getRuntime().exec("cmd /c "+path);
              BufferedReader in = new BufferedReader(new InputStreamReader(proc.getInputStream()));
             String result = in.readLine();
             String line = null;

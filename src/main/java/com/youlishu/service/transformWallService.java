@@ -26,28 +26,30 @@ public class transformWallService {
     @Autowired
     private WallTransformInfoMapper wallTransformInfoMapper;
 
-//    @Value("${Windows.inphotopath}")
+
+//    @Value("${Linux.inphotopath}")
 //    private String inphotopath;
 //
-//    @Value("${Windows.intxtpath}")
+//    @Value("${Linux.intxtpath}")
 //    private String intxtpath;
 //
-//    @Value("${Windows.outpath}")
+//    @Value("${Linux.inphotopathurl}")
+//    private String inphotopathurl;
+//
+//    @Value("${Linux.intxtpathurl}")
+//    private String intxtpathurl;
+//
+//    @Value("${Linux.outpath}")
 //    private String outpath;
 
-    @Value("${Linux.inphotopath}")
+
+    @Value("${Windows.inphotopath}")
     private String inphotopath;
 
-    @Value("${Linux.intxtpath}")
+    @Value("${Windows.intxtpath}")
     private String intxtpath;
 
-    @Value("${Linux.inphotopathurl}")
-    private String inphotopathurl;
-
-    @Value("${Linux.intxtpathurl}")
-    private String intxtpathurl;
-
-    @Value("${Linux.outpath}")
+    @Value("${Windows.outpath}")
     private String outpath;
 
 
@@ -87,9 +89,9 @@ public class transformWallService {
                     fw.close();
 //                    sb.append(2);
                     //数据库添加信息
-                    String inPngPath = inphotopathurl + fileName;
+                    String inPngPath = inphotopath + fileName;
 //                    sb.append(3);
-                    String inTxtPath = intxtpathurl + fileName.replace(".png",".txt");
+                    String inTxtPath = intxtpath + fileName.replace(".png",".txt");
 //                    sb.append(4);
                     WallTransformInfo wallTransformInfo = new WallTransformInfo();
                     wallTransformInfo.setUploadTime(date);
@@ -212,9 +214,9 @@ public class transformWallService {
                         fw.close();
 //                    sb.append(2);
                         //数据库添加信息
-                        String inPngPath = inphotopathurl + fileName;
+                        String inPngPath = inphotopath + fileName;
 //                    sb.append(3);
-                        String inTxtPath = intxtpathurl + fileName.replace(".png", ".txt");
+                        String inTxtPath = intxtpath + fileName.replace(".png", ".txt");
 //                    sb.append(4);
                         WallTransformInfo wallTransformInfo1 = new WallTransformInfo();
                         wallTransformInfo1.setUploadTime(date);
