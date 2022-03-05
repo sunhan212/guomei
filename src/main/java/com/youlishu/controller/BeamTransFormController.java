@@ -70,7 +70,7 @@ public class BeamTransFormController {
             // 执行py文件
 //            proc = Runtime.getRuntime().exec("python3" + wallpypath);
             proc = Runtime.getRuntime().exec("cmd /c "+path);
-             BufferedReader in = new BufferedReader(new InputStreamReader(proc.getInputStream()));
+            BufferedReader in = new BufferedReader(new InputStreamReader(proc.getInputStream()));
             String result = in.readLine();
             String line = null;
             while ((line = in.readLine()) != null) {
