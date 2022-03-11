@@ -24,12 +24,12 @@ import java.io.*;
 @RequestMapping("/beam/download")
 public class BeamDownLoadController {
 
-//    @Value("${Linux.beamdownloadurl}")
-//    private String beamdownloadurl;
-//    @Value("${Linux.beamdownload}")
-//    private String beamdownload;
+    //本机地址
     @Value("${Windows.beamdownload}")
     private String beamdownload;
+    //公网地址
+    @Value("${Windows.beamdownloadurl}")
+    private String beamdownloadurl;
     /**
      * @function 下载
      * @params
@@ -55,7 +55,7 @@ public class BeamDownLoadController {
 
             //获取文件的路径 url从配置文件中获取
 
-            String filePath = (beamdownload + File.separator + fileName);
+            String filePath = (beamdownloadurl + File.separator + fileName);
             FileInputStream input = new FileInputStream(filePath);
             OutputStream out = response.getOutputStream();
             byte[] b = new byte[20*2048];

@@ -13,7 +13,9 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.xml.xpath.XPath;
 import java.io.BufferedReader;
+import java.io.Console;
 import java.io.InputStreamReader;
 
 /**
@@ -50,28 +52,22 @@ public class TransFromController {
     @ApiOperation(value = "进行剪力墙算法转换", notes = "根据项目名称进行转换")
     @ApiImplicitParams({
             @ApiImplicitParam(name = "prjname", value = "项目名称", required = true, dataType = "Param"),
+            @ApiImplicitParam(name = "pngFileName", value = "图片名称", required = true, dataType = "Param"),
             @ApiImplicitParam(name = "token", value = "验证码", required = true, dataType = "header"),
             @ApiImplicitParam(name = "username", value = "用户名", required = true, dataType = "header")
     })
     @GetMapping("/inwall")
-    private ResponseBean transformWall( String prjname ,HttpServletRequest request){
+    private ResponseBean transformWall( String prjname ,String pngFileName, HttpServletRequest request){
         //服务器运行python脚本，这一步其实会把所有的文件都转换了，但是数据库不落入信息，用户也看不到
         //String arguments = "python3 /data/java-prj/structGAN/structGAN/StructGAN_p1_wall_20220117.py";
-        //String[] arguments = {"python3" +"C:\\Web_system\\StructGAN_v0\\StructGAN_p1_wall_20220117.py"};
-        //String[] arguments = {"cmd /c"+" python3 C:\\Web_system\\StructGAN_v0\\StructGAN_p1_wall_20220117.py"};
-        String path = "C:/Web_system/StructGAN_v0/StructGAN_p1_wall_20220117.py";
-
+        String pngFileName1 = pngFileName.substring(0,pngFileName.indexOf("."));
+        //String path = "C:/Web_system/nginx-1.20.2/html/StructGAN_v0/StructGAN_p1_wall_20220117.py";
+        String[] args1 = new String[] { "python", "C:\\Web_system\\nginx-1.20.2\\html\\StructGAN_v0\\StructGAN_p1_wall_20220117.py ",pngFileName1};
         String username = request.getHeader("username");
         Process proc;
         try {
-//            Process process = Runtime.getRuntime().exec(arguments);
-//            BufferedReader in = new BufferedReader(new InputStreamReader(process.getInputStream()));
-//            in.close();
-//            int re = process.waitFor();
-//            System.out.println(re);
-            // 执行py文件
-//            proc = Runtime.getRuntime().exec("python3" + wallpypath);
-            proc = Runtime.getRuntime().exec("cmd /c "+path);
+            //proc = Runtime.getRuntime().exec("cmd /c "+ path);
+            proc = Runtime.getRuntime().exec(args1);
 
             BufferedReader in = new BufferedReader(new InputStreamReader(proc.getInputStream()));
             String result = in.readLine();

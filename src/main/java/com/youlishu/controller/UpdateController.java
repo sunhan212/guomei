@@ -45,7 +45,7 @@ public class UpdateController {
         try {
             String username = request.getHeader("username");
 
-            WallTransformInfo wallTransformInfo = transformWallService.findOneWall(id,username);
+            WallTransformInfo wallTransformInfo = transformWallService.findOneWall(id);
             if (!wallTransformInfo.equals(null)) {
                 return new ResponseBean(200,"查询成功",wallTransformInfo);
             }else {

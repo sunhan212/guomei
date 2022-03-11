@@ -38,12 +38,25 @@
         user_name
     </sql>
   <!--查看单个梁板数据列表-->
-    <select id="findOneBeam" resultType="com.youlishu.bean.BeamTransformInfo">
-        select * from beam_transform_info where id = #{id} and user_name = #{username}
+    <select id="findOneBeam" resultMap="BaseResultMap">
+        select id,
+        prj_name,
+        prj_status,
+        wall_out_png_url,
+        beam_in_png_url,
+        beam_in_txt_url,
+        beam_out_txt_url,
+        beam_out_png_url,
+        beam_upload_time,
+        wall_upload_time,
+        transform_time,
+        txt_file_name,
+        png_file_name,
+        user_name from beam_transform_info where id = #{id}
     </select>
 
     <delete id="deleteBeam" >
-        delete from beam_transform_info where id = #{id} and user_name = #{username}
+        delete from beam_transform_info where id = #{id}
     </delete>
 
 

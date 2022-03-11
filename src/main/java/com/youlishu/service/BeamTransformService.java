@@ -20,22 +20,7 @@ public class BeamTransformService {
     @Autowired
     private UserLogMapper userLogMapper;
 
-
-
-//    @Value("${Linux.beaminpicpath}")
-//    private String beaminpicpath;
-//    @Value("${Linux.beaminpicpathurl}")
-//    private String beaminpicpathurl;
-//
-//    @Value("${Linux.wallinpicpath}")
-//    private String wallinpicpath;
-//    @Value("${Linux.wallinpicpathurl}")
-//    private String wallinpicpathurl;
-//
-//    @Value("${Linux.beamoutpath}")
-//    private String beamoutpath;
-//    @Value("${Linux.beamoutpathurl}")
-//    private String beamoutpathurl;
+    //本机地址
     @Value("${Windows.beaminpicpath}")
     private String beaminpicpath;
 
@@ -44,6 +29,16 @@ public class BeamTransformService {
 
     @Value("${Windows.beamoutpath}")
     private String beamoutpath;
+
+    //公网地址
+    @Value("${Windows.beaminpicpathurl}")
+    private String beaminpicpathurl;
+
+    @Value("${Windows.wallinpicpathurl}")
+    private String wallinpicpathurl;
+
+    @Value("${Windows.beamoutpathurl}")
+    private String beamoutpathurl;
 
 
 
@@ -56,10 +51,10 @@ public class BeamTransformService {
             //先找到文件名
             BeamTransformInfo info = beamTransformMapper.getinfo(username,prjName);
             //生成查看输出图片的地址
-            String outpngurl = beamoutpath + info.getPngFileName();
+            String outpngurl = beamoutpathurl + info.getPngFileName();
             System.out.println(outpngurl);
             //生成查看输出文本的地址
-            String outtxturl = beamoutpath + info.getTxtFileName();
+            String outtxturl = beamoutpathurl + info.getTxtFileName();
             System.out.println(outtxturl);
             //String outtxturl = deouttxturl.replace(".txt",".png.txt");
             BeamTransformInfo transinfo = new BeamTransformInfo();
@@ -76,4 +71,9 @@ public class BeamTransformService {
         }
         return 1;
     }
+
+    /*public String findPngFileName(String prjName, String username) {
+
+        return beamTransformMapper.findPngFileName(prjName,username);
+    }*/
 }

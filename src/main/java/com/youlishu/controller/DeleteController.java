@@ -44,7 +44,7 @@ public class DeleteController {
         try {
             String username = request.getHeader("username");
 
-            boolean a = transformWallService.deleteWall(id,username);
+            boolean a = transformWallService.deleteWall(id);
             if (a == true) {
                 return new ResponseBean(200,"删除成功","成功");
             }else {

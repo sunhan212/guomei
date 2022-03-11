@@ -24,10 +24,11 @@ import java.io.*;
 @RequestMapping("/download")
 public class DownLoadController {
 
-//    @Value("${Linux.download}")
-//    private String download;
     @Value("${Windows.download}")
     private String download;
+
+    @Value("${Windows.downloadurl}")
+    private String downloadurl;
     /**
      * @function 下载
      * @params
@@ -53,7 +54,7 @@ public class DownLoadController {
 
             //获取文件的路径 url从配置文件中获取
 
-            String filePath = (download + File.separator + fileName);
+            String filePath = (downloadurl + File.separator + fileName);
             FileInputStream input = new FileInputStream(filePath);
             OutputStream out = response.getOutputStream();
             byte[] b = new byte[20*2048];

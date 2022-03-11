@@ -12,4 +12,6 @@ public interface BeamTransformMapper {
     BeamTransformInfo getinfo(@Param("username") String username, @Param("prjname") String prjname);
 
     int update(BeamTransformInfo transinfo);
+
+    //String findPngFileName(@Param("prjName") String prjName, @Param("username") String username);
 }

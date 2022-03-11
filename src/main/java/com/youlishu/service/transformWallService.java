@@ -26,31 +26,34 @@ public class transformWallService {
     @Autowired
     private WallTransformInfoMapper wallTransformInfoMapper;
 
-
-//    @Value("${Linux.inphotopath}")
-//    private String inphotopath;
-//
-//    @Value("${Linux.intxtpath}")
-//    private String intxtpath;
-//
-//    @Value("${Linux.inphotopathurl}")
-//    private String inphotopathurl;
-//
-//    @Value("${Linux.intxtpathurl}")
-//    private String intxtpathurl;
-//
-//    @Value("${Linux.outpath}")
-//    private String outpath;
-
-
+    //本机地址
     @Value("${Windows.inphotopath}")
     private String inphotopath;
+
+    @Value("${Windows.inphotourl}")
+    private String inphotourl;
+
+    @Value("${Windows.intxturl}")
+    private String intxturl;
+
+    @Value("${Windows.outurl}")
+    private String outurl;
 
     @Value("${Windows.intxtpath}")
     private String intxtpath;
 
     @Value("${Windows.outpath}")
     private String outpath;
+
+    //公网地址
+    @Value("${Windows.inphotopathurl}")
+    private String inphotopathurl;
+
+    @Value("${Windows.intxtpathurl}")
+    private String intxtpathurl;
+
+    @Value("${Windows.outpathurl}")
+    private String outpathurl;
 
 
 
@@ -89,21 +92,22 @@ public class transformWallService {
                     fw.close();
 //                    sb.append(2);
                     //数据库添加信息
-                    String inPngPath = inphotopath + fileName;
+                    String inPngPath = inphotopathurl + fileName;
 //                    sb.append(3);
-                    String inTxtPath = intxtpath + fileName.replace(".png",".txt");
+                    String inTxtPath = intxtpathurl + fileName.replace(".png",".txt");
 //                    sb.append(4);
                     WallTransformInfo wallTransformInfo = new WallTransformInfo();
                     wallTransformInfo.setUploadTime(date);
                     wallTransformInfo.setUserName(username);
                     wallTransformInfo.setInPngUrl(inPngPath);
                     wallTransformInfo.setInTxtUrl(inTxtPath);
-                    wallTransformInfo.setTxtFileName(fileName+".txt");
+                    wallTransformInfo.setTxtFileName(txtFileName);
                     wallTransformInfo.setPngFileName(fileName);
                     wallTransformInfo.setPrjName(prjName);
                     wallTransformInfo.setScale(scale);
                     wallTransformInfo.setSeismic(seismic);
                     wallTransformInfo.setStructure(structure);
+                    wallTransformInfo.setUserName(username);
 //                    sb.append(5);
                     wallTransformInfoMapper.insertSelective(wallTransformInfo);
 //                    sb.append(6);
@@ -139,9 +143,9 @@ public class transformWallService {
             //先找到这个文件名
             WallTransformInfo info = wallTransformInfoMapper.getinfo(username,prjname);
             //生成查看输出图片的地址
-            String outpngurl = outpath+info.getPngFileName();
+            String outpngurl = outpathurl+info.getPngFileName();
             //生成查看输出文本的地址
-            String outtxturl = outpath+info.getTxtFileName();
+            String outtxturl = outpathurl+info.getTxtFileName();
             WallTransformInfo transinfo = new WallTransformInfo();
             transinfo.setOutPngUrl(outpngurl);
             transinfo.setOutTxtUrl(outtxturl);
@@ -171,8 +175,8 @@ public class transformWallService {
     /**
      *查找单个剪力墙数据信息
      */
-    public WallTransformInfo findOneWall(Integer id, String username) {
-        return wallTransformInfoMapper.findOneWall(id,username);
+    public WallTransformInfo findOneWall(Integer id) {
+        return wallTransformInfoMapper.findOneWall(id);
     }
 
     /**
@@ -180,7 +184,7 @@ public class transformWallService {
      */
     public boolean updateWall(MultipartFile file, String prjName, Integer id, String username, String seismic, String structure, String scale) {
         //根据用户名和id先去查询数据
-        WallTransformInfo wallTransformInfo = wallTransformInfoMapper.findOneWall(id,username);
+        WallTransformInfo wallTransformInfo = wallTransformInfoMapper.findOneWall(id);
         //删除服务器上的剪力墙上传地址和参数TXT文件地址
         boolean delete_flag = false;
         try {
@@ -196,7 +200,7 @@ public class transformWallService {
                 if (!file.isEmpty()) {
                     //上传图片 我也不知道这个try为啥这样写 但是能跑别改
                     try (BufferedOutputStream out = new BufferedOutputStream(
-                            new FileOutputStream((inphotopath + File.separator + fileName)))) {
+                            new FileOutputStream((inphotopathurl + File.separator + fileName)))) {
                         out.write(file.getBytes());
                         out.flush();
                         out.close();
@@ -207,16 +211,16 @@ public class transformWallService {
                         //给文本改一下png的后缀
                         String txtFileName = fileName.replace(".png", ".txt");
                         //生成一个txt文件
-                        File txtfile = new File(intxtpath + File.separator + txtFileName);
+                        File txtfile = new File(intxtpathurl + File.separator + txtFileName);
                         //写入拼接好的文本内容
                         FileWriter fw = new FileWriter(txtfile);
                         fw.write(txt);
                         fw.close();
 //                    sb.append(2);
                         //数据库添加信息
-                        String inPngPath = inphotopath + fileName;
+                        String inPngPath = inphotopathurl + fileName;
 //                    sb.append(3);
-                        String inTxtPath = intxtpath + fileName.replace(".png", ".txt");
+                        String inTxtPath = intxtpathurl + fileName.replace(".png", ".txt");
 //                    sb.append(4);
                         WallTransformInfo wallTransformInfo1 = new WallTransformInfo();
                         wallTransformInfo1.setUploadTime(date);
@@ -255,26 +259,62 @@ public class transformWallService {
         return true;
     }
 
-    public boolean deleteWall(Integer id, String username) {
+    public boolean deleteWall(Integer id) {
         //查询该数据
-        WallTransformInfo wallTransformInfo = wallTransformInfoMapper.findOneWall(id,username);
-        //删除服务器上的照片、TXT文件
-        boolean delete_flag = false;
-        File file = new File(wallTransformInfo.getInPngUrl(),wallTransformInfo.getPngFileName());
-        if (!file.exists() && !file.isFile() && !file.delete())
-            delete_flag = true;
-        else
-            delete_flag = false;
-        //删除数据库信息
-        if (delete_flag == true){
-            int a = wallTransformInfoMapper.deleteWall(id,username);
-            if (a == 1){
-                return true;
+        WallTransformInfo wallTransformInfo = wallTransformInfoMapper.findOneWall(id);
+        //判断是否转换
+        //未转换情况下
+        if (wallTransformInfo.getOutPngUrl()==null && wallTransformInfo.getOutTxtUrl()==null){
+            //删除服务器上的照片、TXT文件
+            boolean delete_flag = false;
+            //删除照片
+            File file1 = new File(inphotourl+wallTransformInfo.getPngFileName());
+            File file2 = new File(intxturl+wallTransformInfo.getTxtFileName());
+            if (file1.exists() && file1.isFile() && file2.exists() && file2.isFile()){
+                file1.delete();
+                file2.delete();
+                delete_flag = true;
+            }else
+                delete_flag = false;
+            //删除数据库信息
+            if (delete_flag == true){
+                int a = wallTransformInfoMapper.deleteWall(id);
+                if (a == 1){
+                    return true;
+                }else {
+                    return false;
+                }
             }else {
                 return false;
             }
+            //已经转换
         }else {
-            return false;
+            //删除服务器上的照片、TXT文件
+            boolean delete_flag = false;
+            //删除照片
+            File file1 = new File(inphotourl+wallTransformInfo.getPngFileName());
+            File file2 = new File(intxturl+wallTransformInfo.getTxtFileName());
+            File file3 = new File(outurl+wallTransformInfo.getPngFileName());
+            File file4 = new File(outurl+wallTransformInfo.getTxtFileName());
+            if (file1.exists() && file1.isFile() && file2.exists() && file2.isFile()&& file3.exists() && file3.isFile()&& file4.exists() && file4.isFile()){
+                file1.delete();
+                file2.delete();
+                file3.delete();
+                file4.delete();
+                delete_flag = true;
+            }else
+                delete_flag = false;
+            //删除数据库信息
+            if (delete_flag == true){
+                int a = wallTransformInfoMapper.deleteWall(id);
+                if (a == 1){
+                    return true;
+                }else {
+                    return false;
+                }
+            }else {
+                return false;
+            }
         }
     }
 }

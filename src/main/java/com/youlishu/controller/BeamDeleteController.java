@@ -42,7 +42,7 @@ public class BeamDeleteController {
         try {
             String username = request.getHeader("username");
 
-            boolean a = beamDeleteService.deleteBeam(id,username);
+            boolean a = beamDeleteService.deleteBeam(id);
             if (a == true) {
                 return new ResponseBean(200,"删除成功","成功");
             }else {

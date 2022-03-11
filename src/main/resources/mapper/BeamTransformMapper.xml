@@ -179,5 +179,9 @@
     SELECT txt_file_name,png_file_name from beam_transform_info where user_name = #{username} and prj_name = #{prjname}
   </select>
 
+  <!--<select id="findPngFileName" resultType="string">
+    select png_file_name from beam_transform_info where user_name = #{username} and prj_name = #{prjName}
+  </select>-->
+
 
 </mapper>

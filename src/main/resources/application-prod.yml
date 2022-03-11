@@ -82,46 +82,57 @@ spring:
 
 Windows:
   #上传输入图片服务器地址
-  inphotopath: C:\Web_system\StructGAN_v0\1_input_shearwall\architecture\
+  inphotopath: C:\Web_system\nginx-1.20.2\html\StructGAN_v0\1_input_shearwall\architecture\
   #输入图片地址
-  #inphotopathurl: http://101.43.179.180:18080/structGAN/1_input_shearwall/architecture/
+  inphotopathurl: http://39.107.239.129:8081/StructGAN_v0/1_input_shearwall/architecture/
   #上传输入参数服务器地址
-  intxtpath: C:\Web_system\StructGAN_v0\1_input_shearwall\config\
+  intxtpath: C:\Web_system\nginx-1.20.2\html\StructGAN_v0\1_input_shearwall\config\
   #输入参数地址
-  #intxtpathurl: http://101.43.179.180:18080/structGAN/1_input_shearwall/config/
+  intxtpathurl: http://39.107.239.129:8081/StructGAN_v0/1_input_shearwall/config/
   #  outpath: /data/java-prj/structGAN/structGAN/1_output_shearwall
   #输出文件地址
-  #outpath: http://101.43.179.180:18080/structGAN/1_output_shearwall/
-  outpath: C:\Web_system\StructGAN_v0\1_output_shearwall\
+  outpathurl: http://39.107.239.129:8081/StructGAN_v0/1_output_shearwall/
+  outpath: C:\Web_system\nginx-1.20.2\html\StructGAN_v0\1_output_shearwall\
   #下载地址
-  download: C:\Web_system\StructGAN_v0\1_output_shearwall\
+  download: C:\Web_system\nginx-1.20.2\html\StructGAN_v0\1_output_shearwall\
+  #下载服务器地址
+  downloadurl: http://39.107.239.129:8081/StructGAN_v0/1_output_shearwall/
   #脚本地址
-  wallpypath: C:\Web_system\StructGAN_v0\StructGAN_p1_wall_20220117.py
+  wallpypath: C:\Web_system\nginx-1.20.2\html\StructGAN_v0\StructGAN_p1_wall_20220117.py
+  #删除路径
+  inphotourl: C:\Web_system\nginx-1.20.2\html\StructGAN_v0\1_input_shearwall\architecture\
+  intxturl: C:\Web_system\nginx-1.20.2\html\StructGAN_v0\1_input_shearwall\config\
+  outurl: C:\Web_system\nginx-1.20.2\html\StructGAN_v0\1_output_shearwall\
 
   #---------------------------------------------------------------------
   #剪力墙上传图片服务器地址
-  wallinpicpath: C:\Web_system\StructGAN_v0\2_input_beam\structure\
+  wallinpicpath: C:\Web_system\nginx-1.20.2\html\StructGAN_v0\2_input_beam\structure\
   #剪力墙上传地址
-  #wallinpicpathurl: http://101.43.179.180:18080/structGAN/2_input_beam/structure/
+  wallinpicpathurl: http://39.107.239.129:8081/StructGAN_v0/2_input_beam/structure/
   #建筑空间上传图片服务器地址
-  beaminpicpath: C:\Web_system\StructGAN_v0\2_input_beam\architecture\
+  beaminpicpath: C:\Web_system\nginx-1.20.2\html\StructGAN_v0\2_input_beam\architecture\
   #建筑空间 上传地址
-  #beaminpicpathurl: http://101.43.179.180:18080/structGAN/2_input_beam/architecture/
+  beaminpicpathurl: http://39.107.239.129:8081/StructGAN_v0/2_input_beam/architecture/
   #梁板上传参数服务器地址
-  beamintxtpath: C:\Web_system\StructGAN_v0\2_input_beam\config\
+  beamintxtpath: C:\Web_system\nginx-1.20.2\html\StructGAN_v0\2_input_beam\config\
   #梁板上传参数服务器地址
-  #beamintxtpathurl: http://101.43.179.180:18080/structGAN/2_input_beam/config/
+  beamintxtpathurl: http://39.107.239.129:8081/StructGAN_v0/2_input_beam/config/
   #输出梁板服务器地址
-  beamoutpath: C:\Web_system\StructGAN_v0\2_output_beam\
+  beamoutpath: C:\Web_system\nginx-1.20.2\html\StructGAN_v0\2_output_beam\
   #输出梁板地址
- # beamoutpathurl: http://101.43.179.180:18080/structGAN/2_output_beam/
+  beamoutpathurl: http://39.107.239.129:8081/StructGAN_v0/2_output_beam/
   #beamoutpathurl: C:\Web_system\StructGAN_v0\2_output_beam
   #服务器下载地址
-  beamdownload: C:\Web_system\StructGAN_v0\2_output_beam\
+  beamdownload: C:\Web_system\nginx-1.20.2\html\StructGAN_v0\2_output_beam\
   #下载地址
-  #beamdownloadurl: http://101.43.179.180:18080/structGAN/2_output_beam/
+  beamdownloadurl: http://39.107.239.129:8081/StructGAN_v0/2_output_beam/
   #脚本地址
-  beampypath: C:\Web_system\StructGAN_v0\StructGAN_p2_beam_20220222.py
+  beampypath: C:\Web_system\nginx-1.20.2\html\StructGAN_v0\StructGAN_p2_beam_20220222.py
+  #删除路径
+  beaminphotourl: C:\Web_system\nginx-1.20.2\html\StructGAN_v0\2_input_beam\architecture\
+  wallinphotourl: C:\Web_system\nginx-1.20.2\html\StructGAN_v0\2_input_beam\structure\
+  beamintxturl: C:\Web_system\nginx-1.20.2\html\StructGAN_v0\2_input_beam\config\
+  beamouturl: C:\Web_system\nginx-1.20.2\html\StructGAN_v0\2_output_beam\
 
 
 # uucs用户中心配置

@@ -23,27 +23,7 @@ public class BeamUploadService {
     @Autowired
     private UserLogMapper userLogMapper;
 
-
-//    @Value("${Linux.beaminpicpath}")
-//    private String beaminpicpath;
-//    @Value("${Linux.beaminpicpathurl}")
-//    private String beaminpicpathurl;
-//
-//    @Value("${Linux.beamintxtpath}")
-//    private String beamintxtpath;
-//    @Value("${Linux.beamintxtpathurl}")
-//    private String beamintxtpathurl;
-//
-//    @Value("${Linux.wallinpicpath}")
-//    private String wallinpicpath;
-//    @Value("${Linux.wallinpicpathurl}")
-//    private String wallinpicpathurl;
-//
-//    @Value("${Linux.beamoutpath}")
-//    private String beamoutpath;
-//    @Value("${Linux.beamoutpathurl}")
-//    private String beamoutpathurl;
-
+//本机地址
     @Value("${Windows.beaminpicpath}")
     private String beaminpicpath;
 
@@ -55,6 +35,18 @@ public class BeamUploadService {
 
     @Value("${Windows.beamoutpath}")
     private String beamoutpath;
+//公网地址
+    @Value("${Windows.beaminpicpathurl}")
+    private String beaminpicpathurl;
+
+    @Value("${Windows.beamintxtpathurl}")
+    private String beamintxtpathurl;
+
+    @Value("${Windows.wallinpicpathurl}")
+    private String wallinpicpathurl;
+
+    @Value("${Windows.beamoutpathurl}")
+    private String beamoutpathurl;
 
 
     Date date = new Date();
@@ -93,11 +85,11 @@ public class BeamUploadService {
                     fw.close();
                     //数据库添加信息
                     //输出上传参数TXT文件地址
-                    String beamInTxtPath = beamintxtpath + fileName1.replace(".png",".txt");
+                    String beamInTxtPath = beamintxtpathurl + fileName1.replace(".png",".txt");
                     //输出上传建筑空间照片地址
-                    String outBeamPngPath = beaminpicpath + File.separator + fileName1;
+                    String outBeamPngPath = beaminpicpathurl + File.separator + fileName1;
                     //输出上传剪力墙照片地址
-                    String outWallPngPath = wallinpicpath + File.separator + fileName2;
+                    String outWallPngPath = wallinpicpathurl + File.separator + fileName2;
                     BeamTransformInfo beamTransformInfo = new BeamTransformInfo();
                     beamTransformInfo.setBeamUploadTime(date);
                     beamTransformInfo.setPrjName(prjName);
@@ -112,6 +104,7 @@ public class BeamUploadService {
                     beamTransformInfo.setBeamLong(beamLong);
                     beamTransformInfo.setBeamLow(beamLow);
                     beamTransformInfo.setBeamUp(beamUp);
+                    beamTransformInfo.setUserName(username);
                     beamUploadMapper.insertBeamAndWall(beamTransformInfo);
                     //日志
                     UserLog userLog = new UserLog();

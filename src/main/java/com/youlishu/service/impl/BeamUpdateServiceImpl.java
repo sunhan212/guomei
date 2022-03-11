@@ -24,19 +24,7 @@ public class BeamUpdateServiceImpl implements BeamUpdateService {
     @Autowired
     private BeamUpdateMapper beamUpdateMapper;
 
-
-//    @Value("${Linux.beaminpicpath}")
-//    private String beaminpicpath;
-//
-//    @Value("${Linux.beamintxtpath}")
-//    private String beamintxtpath;
-//
-//    @Value("${Linux.wallinpicpath}")
-//    private String wallinpicpath;
-//
-//    @Value("${Linux.beamoutpath}")
-//    private String beamoutpath;
-    
+    //本机地址
     @Value("${Windows.beaminpicpath}")
     private String beaminpicpath;
 
@@ -48,6 +36,18 @@ public class BeamUpdateServiceImpl implements BeamUpdateService {
 
     @Value("${Windows.beamoutpath}")
     private String beamoutpath;
+    //公网地址
+    @Value("${Windows.beaminpicpathurl}")
+    private String beaminpicpathurl;
+
+    @Value("${Windows.beamintxtpathurl}")
+    private String beamintxtpathurl;
+
+    @Value("${Windows.wallinpicpathurl}")
+    private String wallinpicpathurl;
+
+    @Value("${Windows.beamoutpathurl}")
+    private String beamoutpathurl;
 
     Date date = new Date();
     SimpleDateFormat dateFormat= new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
@@ -81,9 +81,9 @@ public class BeamUpdateServiceImpl implements BeamUpdateService {
                 if (!file1.isEmpty() && !file2.isEmpty()) {
 
                     try (BufferedOutputStream out1 = new BufferedOutputStream(
-                            new FileOutputStream((beaminpicpath + File.separator + fileName1)));
+                            new FileOutputStream((beaminpicpathurl + File.separator + fileName1)));
                          BufferedOutputStream out2 = new BufferedOutputStream(
-                                 new FileOutputStream((wallinpicpath + File.separator + fileName2)))) {
+                                 new FileOutputStream((wallinpicpathurl + File.separator + fileName2)))) {
                         out1.write(file1.getBytes());
                         out2.write(file2.getBytes());
                         out1.flush();
@@ -94,17 +94,17 @@ public class BeamUpdateServiceImpl implements BeamUpdateService {
                         //TODO
                         String txt = beamDesignType + "," + beamLong + "," + beamUp + "," + beamLow;
                         String txtFileName = fileName1.replace(".png", ".txt");
-                        File txtfile = new File(beamintxtpath + File.separator + txtFileName);
+                        File txtfile = new File(beamintxtpathurl + File.separator + txtFileName);
                         FileWriter fw = new FileWriter(txtfile);
                         fw.write(txt);
                         fw.close();
                         //数据库添加信息
                         //输出上传参数TXT文件地址
-                        String beamInTxtPath = beamintxtpath + fileName1.replace(".png", ".txt");
+                        String beamInTxtPath = beamintxtpathurl + fileName1.replace(".png", ".txt");
                         //输出上传建筑空间照片地址
-                        String outBeamPngPath = beaminpicpath + File.separator + fileName1;
+                        String outBeamPngPath = beaminpicpathurl + File.separator + fileName1;
                         //输出上传剪力墙照片地址
-                        String outWallPngPath = wallinpicpath + File.separator + fileName2;
+                        String outWallPngPath = wallinpicpathurl + File.separator + fileName2;
                         BeamTransformInfo beamTransformInfo1 = new BeamTransformInfo();
                         beamTransformInfo1.setBeamUploadTime(date);
                         beamTransformInfo1.setId(id);

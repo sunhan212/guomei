@@ -23,9 +23,9 @@ public interface WallTransformInfoMapper {
 
     WallTransformInfo getinfo(@Param("username") String username,@Param("prjname") String prjname);
 
-    WallTransformInfo  findOneWall(@Param("id") Integer id, @Param("username") String username);
+    WallTransformInfo  findOneWall(@Param("id") Integer id);
 
     int  updateWall(WallTransformInfo wallTransformInfo);
 
-    int deleteWall(@Param("id") Integer id, @Param("username") String username);
+    int deleteWall(@Param("id") Integer id);
 }
