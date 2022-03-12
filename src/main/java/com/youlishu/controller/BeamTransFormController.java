@@ -54,7 +54,7 @@ public class BeamTransFormController {
             @ApiImplicitParam(name = "username", value = "用户名", required = true, dataType = "header")
     })
     @GetMapping("/inbeam")
-    private ResponseBean transformBeam(String prjName ,String pngFileName, HttpServletRequest request){
+    private ResponseBean transformBeam(Integer id ,String pngFileName, HttpServletRequest request){
         //服务器运行python脚本，这一步其实会把所有的文件都转换了，但是数据库不落入信息，用户也看不到
 //        String arguments = "python3 /data/java-prj/structGAN/structGAN/StructGAN_p2_beam_20220221.py";
         String username = request.getHeader("username");
@@ -75,11 +75,11 @@ public class BeamTransFormController {
             //服务器命令执行成功只能是0，其他都是失败
             int re = proc.waitFor();
             if (re == 0){
-                int a = beamTransformService.uploadBeamTransformInfo(prjName,username);
+                int a = beamTransformService.uploadBeamTransformInfo(id,username);
                 if (a == 1){
                     return new ResponseBean(200,"转换成功","成功");
                 }else {
-                    return new ResponseBean(500,"数据输入失败","失败");
+                    return new ResponseBean(503,"数据输入失败","失败");
                 }
             }
             else{

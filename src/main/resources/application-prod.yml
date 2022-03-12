@@ -92,6 +92,7 @@ Windows:
   #  outpath: /data/java-prj/structGAN/structGAN/1_output_shearwall
   #输出文件地址
   outpathurl: http://39.107.239.129:8081/StructGAN_v0/1_output_shearwall/
+
   outpath: C:\Web_system\nginx-1.20.2\html\StructGAN_v0\1_output_shearwall\
   #下载地址
   download: C:\Web_system\nginx-1.20.2\html\StructGAN_v0\1_output_shearwall\

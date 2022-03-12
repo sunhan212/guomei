@@ -55,7 +55,7 @@ public class BeamDownLoadController {
 
             //获取文件的路径 url从配置文件中获取
 
-            String filePath = (beamdownloadurl + File.separator + fileName);
+            String filePath = (beamdownload + File.separator + fileName);
             FileInputStream input = new FileInputStream(filePath);
             OutputStream out = response.getOutputStream();
             byte[] b = new byte[20*2048];

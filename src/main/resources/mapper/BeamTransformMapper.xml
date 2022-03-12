@@ -163,7 +163,7 @@
       beam_out_txt_url = #{beamOutTxtUrl,jdbcType=VARCHAR},
       beam_out_png_url = #{beamOutPngUrl,jdbcType=VARCHAR},
       transform_time = #{transformTime,jdbcType=TIMESTAMP}
-    where user_name = #{userName,jdbcType=VARCHAR} and prj_name = #{prjName,jdbcType=VARCHAR}
+    where user_name = #{userName,jdbcType=VARCHAR} and id = #{id,jdbcType=INTEGER}
   </update>
 
 
@@ -176,7 +176,7 @@
   </select>
 
   <select id="getinfo" resultMap="BaseResultMap">
-    SELECT txt_file_name,png_file_name from beam_transform_info where user_name = #{username} and prj_name = #{prjname}
+    SELECT txt_file_name,png_file_name from beam_transform_info where user_name = #{username} and id = #{id}
   </select>
 
   <!--<select id="findPngFileName" resultType="string">

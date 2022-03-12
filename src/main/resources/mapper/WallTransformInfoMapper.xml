@@ -133,7 +133,7 @@
     set out_png_url = #{outPngUrl,jdbcType=VARCHAR},
         out_txt_url = #{outTxtUrl,jdbcType=VARCHAR},
         transform_time = #{transformTime,jdbcType=TIMESTAMP}
-        where user_name = #{userName,jdbcType = VARCHAR} and prj_name = #{prjName,jdbcType=VARCHAR}
+        where user_name = #{userName,jdbcType = VARCHAR} and id = #{id,jdbcType=INTEGER}
   </update>
 
   <select id="findWallInfo" resultMap="BaseResultMap">
@@ -154,7 +154,7 @@
   </delete>
 
   <select id="getinfo" resultMap="BaseResultMap">
-    SELECT txt_file_name,png_file_name from wall_transform_info where user_name = #{username} and prj_name = #{prjname}
+    SELECT txt_file_name,png_file_name from wall_transform_info where user_name = #{username} and id = #{id}
   </select>
 
 </mapper>

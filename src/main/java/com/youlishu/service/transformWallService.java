@@ -107,7 +107,6 @@ public class transformWallService {
                     wallTransformInfo.setScale(scale);
                     wallTransformInfo.setSeismic(seismic);
                     wallTransformInfo.setStructure(structure);
-                    wallTransformInfo.setUserName(username);
 //                    sb.append(5);
                     wallTransformInfoMapper.insertSelective(wallTransformInfo);
 //                    sb.append(6);
@@ -138,10 +137,10 @@ public class transformWallService {
      * 上传转换后的信息
      * @param
      */
-    public int uploadTransformInfo(String prjname,String username) {
+    public int uploadTransformInfo(Integer id,String username) {
         try {
             //先找到这个文件名
-            WallTransformInfo info = wallTransformInfoMapper.getinfo(username,prjname);
+            WallTransformInfo info = wallTransformInfoMapper.getinfo(username,id);
             //生成查看输出图片的地址
             String outpngurl = outpathurl+info.getPngFileName();
             //生成查看输出文本的地址
@@ -151,7 +150,8 @@ public class transformWallService {
             transinfo.setOutTxtUrl(outtxturl);
             transinfo.setTransformTime(date);
             transinfo.setUserName(username);
-            transinfo.setPrjName(prjname);
+            transinfo.setId(id);
+            //transinfo.setPrjName(prjname);
             wallTransformInfoMapper.update(transinfo);
 
         }catch (Exception e) {
@@ -188,11 +188,15 @@ public class transformWallService {
         //删除服务器上的剪力墙上传地址和参数TXT文件地址
         boolean delete_flag = false;
         try {
-            File files = new File(wallTransformInfo.getInPngUrl(), wallTransformInfo.getInTxtUrl());
-            if (!files.exists() && !files.isFile() && !files.delete())
+            File file1 = new File(inphotourl+wallTransformInfo.getPngFileName());
+            File file2 = new File(intxturl+wallTransformInfo.getTxtFileName());
+            if (file1.exists() && file1.isFile() && file2.exists() && file2.isFile()){
+                file1.delete();
+                file2.delete();
                 delete_flag = true;
-            else
+            }else{
                 delete_flag = false;
+            }
             if (delete_flag == true) {
                 //修改数据库信息
                 String fileName = file.getOriginalFilename();
@@ -200,7 +204,7 @@ public class transformWallService {
                 if (!file.isEmpty()) {
                     //上传图片 我也不知道这个try为啥这样写 但是能跑别改
                     try (BufferedOutputStream out = new BufferedOutputStream(
-                            new FileOutputStream((inphotopathurl + File.separator + fileName)))) {
+                            new FileOutputStream((inphotourl + File.separator + fileName)))) {
                         out.write(file.getBytes());
                         out.flush();
                         out.close();
@@ -211,7 +215,7 @@ public class transformWallService {
                         //给文本改一下png的后缀
                         String txtFileName = fileName.replace(".png", ".txt");
                         //生成一个txt文件
-                        File txtfile = new File(intxtpathurl + File.separator + txtFileName);
+                        File txtfile = new File(intxturl + File.separator + txtFileName);
                         //写入拼接好的文本内容
                         FileWriter fw = new FileWriter(txtfile);
                         fw.write(txt);
@@ -228,7 +232,7 @@ public class transformWallService {
                         wallTransformInfo1.setUserName(username);
                         wallTransformInfo1.setInPngUrl(inPngPath);
                         wallTransformInfo1.setInTxtUrl(inTxtPath);
-                        wallTransformInfo1.setTxtFileName(fileName + ".txt");
+                        wallTransformInfo1.setTxtFileName(txtFileName);
                         wallTransformInfo1.setPngFileName(fileName);
                         wallTransformInfo1.setPrjName(prjName);
                         wallTransformInfo1.setScale(scale);
@@ -251,6 +255,8 @@ public class transformWallService {
                         return false;
                     }
                 }
+            }else {
+                return false;
             }
         }catch (Exception e){
             e.printStackTrace();

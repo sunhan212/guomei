@@ -63,8 +63,13 @@ public class BeamUpdateServiceImpl implements BeamUpdateService {
         //删除服务器上的剪力墙上传地址和参数TXT文件地址
         boolean delete_flag = false;
         try {
-            File files = new File(beamTransformInfo.getBeamInPngUrl(), beamTransformInfo.getPngFileName());
-            if (!files.exists() && !files.isFile() && !files.delete()) {
+            File files1 = new File(beaminpicpath+beamTransformInfo.getPngFileName());
+            File files2 = new File(wallinpicpath+beamTransformInfo.getPngFileName());
+            File files3 = new File(beamintxtpath+beamTransformInfo.getTxtFileName());
+            if (files1.exists() && !files1.isFile() && files2.exists() && !files2.isFile() && files3.exists() && !files3.isFile()) {
+               files1.delete();
+               files2.delete();
+               files3.delete();
                 delete_flag = true;
             } else {
                 delete_flag = false;
@@ -81,9 +86,9 @@ public class BeamUpdateServiceImpl implements BeamUpdateService {
                 if (!file1.isEmpty() && !file2.isEmpty()) {
 
                     try (BufferedOutputStream out1 = new BufferedOutputStream(
-                            new FileOutputStream((beaminpicpathurl + File.separator + fileName1)));
+                            new FileOutputStream((beaminpicpath + File.separator + fileName1)));
                          BufferedOutputStream out2 = new BufferedOutputStream(
-                                 new FileOutputStream((wallinpicpathurl + File.separator + fileName2)))) {
+                                 new FileOutputStream((wallinpicpath + File.separator + fileName2)))) {
                         out1.write(file1.getBytes());
                         out2.write(file2.getBytes());
                         out1.flush();
@@ -94,7 +99,7 @@ public class BeamUpdateServiceImpl implements BeamUpdateService {
                         //TODO
                         String txt = beamDesignType + "," + beamLong + "," + beamUp + "," + beamLow;
                         String txtFileName = fileName1.replace(".png", ".txt");
-                        File txtfile = new File(beamintxtpathurl + File.separator + txtFileName);
+                        File txtfile = new File(beamintxtpath + File.separator + txtFileName);
                         FileWriter fw = new FileWriter(txtfile);
                         fw.write(txt);
                         fw.close();

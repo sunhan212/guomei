@@ -9,7 +9,7 @@ import org.apache.ibatis.annotations.Param;
 public interface BeamTransformMapper {
 
 
-    BeamTransformInfo getinfo(@Param("username") String username, @Param("prjname") String prjname);
+    BeamTransformInfo getinfo(@Param("username") String username, @Param("id") Integer id);
 
     int update(BeamTransformInfo transinfo);
 

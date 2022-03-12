@@ -21,7 +21,7 @@ public interface WallTransformInfoMapper {
 
     Page<WallTransformInfo> findWallInfo(@Param("userName") String userName);
 
-    WallTransformInfo getinfo(@Param("username") String username,@Param("prjname") String prjname);
+    WallTransformInfo getinfo(@Param("username") String username,@Param("id") Integer id);
 
     WallTransformInfo  findOneWall(@Param("id") Integer id);
 

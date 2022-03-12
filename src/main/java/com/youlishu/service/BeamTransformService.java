@@ -46,10 +46,10 @@ public class BeamTransformService {
     SimpleDateFormat dateFormat= new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
 
 
-    public int uploadBeamTransformInfo(String prjName, String username) {
+    public int uploadBeamTransformInfo(Integer id, String username) {
         try {
             //先找到文件名
-            BeamTransformInfo info = beamTransformMapper.getinfo(username,prjName);
+            BeamTransformInfo info = beamTransformMapper.getinfo(username,id);
             //生成查看输出图片的地址
             String outpngurl = beamoutpathurl + info.getPngFileName();
             System.out.println(outpngurl);
@@ -62,7 +62,8 @@ public class BeamTransformService {
             transinfo.setBeamOutTxtUrl(outtxturl);
             transinfo.setTransformTime(date);
             transinfo.setUserName(username);
-            transinfo.setPrjName(prjName);
+            transinfo.setId(id);
+            //transinfo.setPrjName(prjName);
             beamTransformMapper.update(transinfo);
 
         }catch (Exception e) {
