@@ -88,11 +88,11 @@ public class BeamUpdateController {
             if (a == true) {
                 return new ResponseBean(200,"修改成功","成功");
             }else {
-                return new ResponseBean(500, "修改失败", "失败");
+                return new ResponseBean(501, "修改失败", a);
             }
         }catch (Exception e) {
             e.printStackTrace();
-            return new ResponseBean(501, "修改失败", e.getMessage());
+            return new ResponseBean(502, prjName+"修改失败", e.getMessage());
         }
     }
 

@@ -59,11 +59,11 @@ public class BeamUploadController {
             if (a == 1) {
                 return new ResponseBean(200,"上传成功",null);
             }else {
-                return new ResponseBean(500, "上传失败", null);
+                return new ResponseBean(501, "上传失败", null);
             }
         }catch (Exception e) {
             e.printStackTrace();
-            return new ResponseBean(500, "上传失败", e.getMessage());
+            return new ResponseBean(502, "上传失败", e.getMessage());
         }
     }
 
@@ -89,11 +89,11 @@ public class BeamUploadController {
             if (a == 1) {
                 return new ResponseBean(200,"上传成功",null);
             }else {
-                return new ResponseBean(500, "上传失败", null);
+                return new ResponseBean(501, "上传失败", a);
             }
         }catch (Exception e) {
             e.printStackTrace();
-            return new ResponseBean(500, "上传失败", e.getMessage());
+            return new ResponseBean(502, "上传失败", e.getMessage());
         }
     }
 

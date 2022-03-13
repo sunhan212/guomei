@@ -66,11 +66,12 @@ public class BeamUpdateServiceImpl implements BeamUpdateService {
             File files1 = new File(beaminpicpath+beamTransformInfo.getPngFileName());
             File files2 = new File(wallinpicpath+beamTransformInfo.getPngFileName());
             File files3 = new File(beamintxtpath+beamTransformInfo.getTxtFileName());
-            if (files1.exists() && !files1.isFile() && files2.exists() && !files2.isFile() && files3.exists() && !files3.isFile()) {
+            if (files1.exists() && files1.isFile() && files2.exists() && files2.isFile() && files3.exists() && files3.isFile()) {
                files1.delete();
                files2.delete();
                files3.delete();
                 delete_flag = true;
+                //C:\Web_system\nginx-1.20.2\html\StructGAN_v0\2_input_beam\structure
             } else {
                 delete_flag = false;
             }
