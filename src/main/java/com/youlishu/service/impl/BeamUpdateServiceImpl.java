@@ -49,7 +49,6 @@ public class BeamUpdateServiceImpl implements BeamUpdateService {
     @Value("${Windows.beamoutpathurl}")
     private String beamoutpathurl;
 
-    Date date = new Date();
     SimpleDateFormat dateFormat= new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
 @Override
     public BeamTransformInfo findOneBeam(Integer id, String username) {
@@ -112,10 +111,10 @@ public class BeamUpdateServiceImpl implements BeamUpdateService {
                         //输出上传剪力墙照片地址
                         String outWallPngPath = wallinpicpathurl + File.separator + fileName2;
                         BeamTransformInfo beamTransformInfo1 = new BeamTransformInfo();
-                        beamTransformInfo1.setBeamUploadTime(date);
+                        beamTransformInfo1.setBeamUploadTime(new Date());
                         beamTransformInfo1.setId(id);
                         beamTransformInfo1.setPrjName(prjName);
-                        beamTransformInfo1.setWallUploadTime(date);
+                        beamTransformInfo1.setWallUploadTime(new Date());
                         beamTransformInfo1.setWallOutPngUrl(outWallPngPath);
                         beamTransformInfo1.setBeamInPngUrl(outBeamPngPath);
                         beamTransformInfo1.setBeamInTxtUrl(beamInTxtPath);
@@ -130,8 +129,8 @@ public class BeamUpdateServiceImpl implements BeamUpdateService {
                         //日志
                         UserLog userLog = new UserLog();
                         userLog.setUsername(username);
-                        userLog.setTime(date);
-                        userLog.setContent("用户：" + username + "在" + dateFormat.format(date) + "进行梁-板构建数据上传");
+                        userLog.setTime(new Date());
+                        userLog.setContent("用户：" + username + "在" + dateFormat.format(new Date()) + "进行梁-板构建数据上传");
                         userLogMapper.insert(userLog);
                         return true;
                     }catch (Exception e){

@@ -49,7 +49,6 @@ public class BeamUploadService {
     private String beamoutpathurl;
 
 
-    Date date = new Date();
     SimpleDateFormat dateFormat= new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
 
 
@@ -91,9 +90,9 @@ public class BeamUploadService {
                     //输出上传剪力墙照片地址
                     String outWallPngPath = wallinpicpathurl + File.separator + fileName2;
                     BeamTransformInfo beamTransformInfo = new BeamTransformInfo();
-                    beamTransformInfo.setBeamUploadTime(date);
+                    beamTransformInfo.setBeamUploadTime(new Date());
                     beamTransformInfo.setPrjName(prjName);
-                    beamTransformInfo.setWallUploadTime(date);
+                    beamTransformInfo.setWallUploadTime(new Date());
                     beamTransformInfo.setWallOutPngUrl(outWallPngPath);
                     beamTransformInfo.setBeamInPngUrl(outBeamPngPath);
                     beamTransformInfo.setBeamInTxtUrl(beamInTxtPath);
@@ -109,8 +108,8 @@ public class BeamUploadService {
                     //日志
                     UserLog userLog = new UserLog();
                     userLog.setUsername(username);
-                    userLog.setTime(date);
-                    userLog.setContent("用户："+username+"在"+dateFormat.format(date)+"进行梁-板构建数据上传");
+                    userLog.setTime(new Date());
+                    userLog.setContent("用户："+username+"在"+dateFormat.format(new Date())+"进行梁-板构建数据上传");
                     userLogMapper.insert(userLog);
 
                     return 1;
@@ -166,7 +165,7 @@ public class BeamUploadService {
                     String outWallPngPath = wallinpicpath + File.separator + fileName1;
                     BeamTransformInfo beamTransformInfo = new BeamTransformInfo();
 //                    beamTransformInfo.setBeamUploadTime(date);
-                    beamTransformInfo.setWallUploadTime(date);
+                    beamTransformInfo.setWallUploadTime(new Date());
                     beamTransformInfo.setWallOutPngUrl(outWallPngPath);
 //                    beamTransformInfo.setPngFileName(fileName1);
                     //beamTransformInfo.setWallOutTxtUrl(outTxtPath);
@@ -174,8 +173,8 @@ public class BeamUploadService {
                     //日志
                     UserLog userLog = new UserLog();
                     userLog.setUsername(username);
-                    userLog.setTime(date);
-                    userLog.setContent("用户："+username+"在"+dateFormat.format(date)+"进行梁-板构建数据上传");
+                    userLog.setTime(new Date());
+                    userLog.setContent("用户："+username+"在"+dateFormat.format(new Date())+"进行梁-板构建数据上传");
                     userLogMapper.insert(userLog);
 
                     return 1;

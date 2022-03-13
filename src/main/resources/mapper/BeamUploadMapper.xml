@@ -112,10 +112,10 @@
         #{pngFileName,jdbcType=VARCHAR},
       </if>
       <if test="beamUploadTime != null">
-        #{beamUploadTime,jdbcType=TIMESTAMP},
+        NOW(),
       </if>
       <if test="wallUploadTime != null">
-        #{wallUploadTime,jdbcType=TIMESTAMP},
+        NOW(),
       </if>
       <if test="userName != null">
         #{userName,jdbcType=VARCHAR},

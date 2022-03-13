@@ -42,7 +42,6 @@ public class BeamTransformService {
 
 
 
-    Date date = new Date();
     SimpleDateFormat dateFormat= new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
 
 
@@ -60,7 +59,7 @@ public class BeamTransformService {
             BeamTransformInfo transinfo = new BeamTransformInfo();
             transinfo.setBeamOutPngUrl(outpngurl);
             transinfo.setBeamOutTxtUrl(outtxturl);
-            transinfo.setTransformTime(date);
+            transinfo.setTransformTime(new Date());
             transinfo.setUserName(username);
             transinfo.setId(id);
             //transinfo.setPrjName(prjName);

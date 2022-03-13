@@ -67,7 +67,7 @@
             beam_low
     FROM beam_transform_info
     WHERE user_name = #{userName}
-    ORDER BY transform_time  DESC
+    ORDER BY beam_upload_time  DESC
   </select>
 
 </mapper>

@@ -57,7 +57,6 @@ public class transformWallService {
 
 
 
-    Date date = new Date();
     SimpleDateFormat dateFormat= new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
 
     /**
@@ -97,7 +96,7 @@ public class transformWallService {
                     String inTxtPath = intxtpathurl + fileName.replace(".png",".txt");
 //                    sb.append(4);
                     WallTransformInfo wallTransformInfo = new WallTransformInfo();
-                    wallTransformInfo.setUploadTime(date);
+                    wallTransformInfo.setUploadTime(new Date());
                     wallTransformInfo.setUserName(username);
                     wallTransformInfo.setInPngUrl(inPngPath);
                     wallTransformInfo.setInTxtUrl(inTxtPath);
@@ -113,8 +112,8 @@ public class transformWallService {
                     //日志
                     UserLog userLog = new UserLog();
                     userLog.setUsername(username);
-                    userLog.setTime(date);
-                    userLog.setContent("用户："+username+"在"+dateFormat.format(date)+"进行剪力墙数据上传");
+                    userLog.setTime(new Date());
+                    userLog.setContent("用户："+username+"在"+dateFormat.format(new Date())+"进行剪力墙数据上传");
                     userLogMapper.insert(userLog);
 //                    sb.append(6);
 
@@ -148,7 +147,7 @@ public class transformWallService {
             WallTransformInfo transinfo = new WallTransformInfo();
             transinfo.setOutPngUrl(outpngurl);
             transinfo.setOutTxtUrl(outtxturl);
-            transinfo.setTransformTime(date);
+            transinfo.setTransformTime(new Date());
             transinfo.setUserName(username);
             transinfo.setId(id);
             //transinfo.setPrjName(prjname);
@@ -227,7 +226,7 @@ public class transformWallService {
                         String inTxtPath = intxtpathurl + fileName.replace(".png", ".txt");
 //                    sb.append(4);
                         WallTransformInfo wallTransformInfo1 = new WallTransformInfo();
-                        wallTransformInfo1.setUploadTime(date);
+                        wallTransformInfo1.setUploadTime(new Date());
                         wallTransformInfo1.setId(id);
                         wallTransformInfo1.setUserName(username);
                         wallTransformInfo1.setInPngUrl(inPngPath);
@@ -244,8 +243,8 @@ public class transformWallService {
                         //日志
                         UserLog userLog = new UserLog();
                         userLog.setUsername(username);
-                        userLog.setTime(date);
-                        userLog.setContent("用户：" + username + "在" + dateFormat.format(date) + "进行剪力墙数据修改上传");
+                        userLog.setTime(new Date());
+                        userLog.setContent("用户：" + username + "在" + dateFormat.format(new Date()) + "进行剪力墙数据修改上传");
                         userLogMapper.insert(userLog);
 //                    sb.append(6);
 

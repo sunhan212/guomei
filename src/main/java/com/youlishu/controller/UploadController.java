@@ -41,6 +41,9 @@ public class UploadController {
             @ApiImplicitParam(name = "token", value = "验证码", required = true, dataType = "header"),
             @ApiImplicitParam(name = "username", value = "用户名", required = true, dataType = "header")
     })
+    //就是这个接口   但是postman一直报token失效，我也没办法本地测试所以你先看看代码上有没有错误啊，别的字段都可以存进去，
+    // 但是就是用户名这个额字段存不进去   用户名是从token里边取出来的   是不是因为token一直失效，然后就没有这个字段了啊    之前是可以存进去的，麻蛋的晚上更新了个包就不行了
+    //从我们公司的一个产品里边获取的
     public ResponseBean transformWall(@RequestPart("file") MultipartFile file,
                                        @RequestParam(required = false)String seismic,
                                        @RequestParam(required = false)String structure,
@@ -50,7 +53,7 @@ public class UploadController {
             String username = request.getHeader("username");
 
             String a = transformWallService.transformwall(file,username,seismic,structure,scale,prjName);
-            if (a == "1") {
+            if ("1".equals(a)) {
                 return new ResponseBean(200,"上传成功","成功");
             }else {
                 return new ResponseBean(501, "数据上传失败", a);
