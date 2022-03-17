@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.youlishu.dao.Bmjg1POMapper">
+  <resultMap id="BaseResultMap" type="com.youlishu.bean.Bmjg1PO">
+    <result column="id" jdbcType="INTEGER" property="id" />
+    <result column="kggs" jdbcType="VARCHAR" property="kggs" />
+    <result column="bk" jdbcType="VARCHAR" property="bk" />
+    <result column="xtgs" jdbcType="VARCHAR" property="xtgs" />
+    <result column="yjzxfb" jdbcType="VARCHAR" property="yjzxfb" />
+    <result column="ejzxfb" jdbcType="VARCHAR" property="ejzxfb" />
+    <result column="bm" jdbcType="VARCHAR" property="bm" />
+    <result column="kz" jdbcType="VARCHAR" property="kz" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    <!--@mbg.generated-->
+    id,
+    kggs,
+    bk,
+    xtgs,
+    yjzxfb,
+    ejzxfb,
+    bm,
+    kz
+  </sql>
+  <delete id="deleteByName">
+    delete from bmjg1 where kggs = #{name}
+  </delete>
+  <delete id="deleteByNameByTwo">
+    delete from bmjg1 where bk = #{name}
+  </delete>
+  <delete id="deleteByNameByThree">
+    delete from bmjg1 where xtgs = #{name}
+  </delete>
+  <delete id="deleteByNameByFour">
+    delete from bmjg1 where yjzxfb = #{name}
+  </delete>
+  <delete id="deleteByNameByFive">
+    delete from bmjg1 where ejzxfb = #{name}
+  </delete>
+  <delete id="deleteByNameBySix">
+    delete from bmjg1 where bm = #{name}
+  </delete>
+  <delete id="deleteByNameByServen">
+    delete from bmjg1 where kz = #{name}
+  </delete>
+
+
+  <select id = "selectCompany" parameterType="string" resultMap="BaseResultMap">
+    SELECT
+    bk,COUNT(bk) as a
+    from bmjg1
+    WHERE kggs = #{name} and bk != ''
+    group by bk
+  </select>
+  <select id="selectCompanyByTwo" parameterType="string" resultMap="BaseResultMap">
+   SELECT
+    xtgs,COUNT(xtgs) as a
+    from bmjg1
+    WHERE bk = #{name} and xtgs != ''
+    group by xtgs
+  </select>
+  <select id="selectCompanyByThree" parameterType="string" resultMap="BaseResultMap">
+    SELECT
+    yjzxfb,COUNT(yjzxfb) as a
+    from bmjg1
+    WHERE xtgs = #{name} and yjzxfb != ''
+    group by yjzxfb
+  </select>
+  <select id="selectCompanyByFour" parameterType="string" resultMap="BaseResultMap">
+     SELECT
+    ejzxfb,COUNT(ejzxfb) as a
+    from bmjg1
+    WHERE yjzxfb = #{name} and ejzxfb != ''
+    group by ejzxfb
+  </select>
+  <select id="selectCompanyByFive" parameterType="string" resultMap="BaseResultMap">
+    SELECT
+    bm,COUNT(bm) as a
+    from bmjg1
+    WHERE ejzxfb = #{name} and bm != ''
+    group by bm
+  </select>
+  <select id="selectCompanyBySix" parameterType="string" resultMap="BaseResultMap">
+    SELECT
+    kz,COUNT(kz) as a
+    from bmjg1
+    WHERE bm = #{name} and kz != ''
+    group by kz
+  </select>
+
+  <insert id="insertNext">
+    insert into bmjg1(kggs,bk)
+    VALUES (#{name},#{nextName})
+  </insert>
+  <insert id="insertNextByTwo">
+    insert into bmjg1(bk,xtgs)
+    VALUES (#{name},#{nextName})
+  </insert>
+  <insert id="insertNextByThree">
+    insert into bmjg1(xtgs,yjzxfb)
+    VALUES (#{name},#{nextName})
+  </insert>
+  <insert id="insertNextByFour">
+    insert into bmjg1(yjzxfb,ejzxfb)
+    VALUES (#{name},#{nextName})
+  </insert>
+  <insert id="insertNextByFive">
+    insert into bmjg1(ejzxfb,bm)
+    VALUES (#{name},#{nextName})
+  </insert>
+  <insert id="insertNextBySix">
+    insert into bmjg1(bm,kz)
+    VALUES (#{name},#{nextName})
+  </insert>
+
+  <update id="update">
+    update bmjg1 set kggs = #{newName}
+    where kggs = #{name}
+  </update>
+  <update id="updateByTwo">
+    update bmjg1 set bk = #{newName}
+    where bk = #{name}
+  </update>
+  <update id="updateByThree">
+    update bmjg1 set xtgs = #{newName}
+    where xtgs = #{name}
+  </update>
+  <update id="updateByFour">
+    update bmjg1 set yjzxfb = #{newName}
+    where yjzxfb = #{name}
+  </update>
+  <update id="updateByFive">
+     update bmjg1 set ejzxfb = #{newName}
+    where ejzxfb = #{name}
+  </update>
+  <update id="updateBySix">
+    update bmjg1 set bm = #{newName}
+    where bm = #{name}
+  </update>
+  <update id="updateByServen">
+    update bmjg1 set kz = #{newName}
+    where kz = #{name}
+  </update>
+</mapper>

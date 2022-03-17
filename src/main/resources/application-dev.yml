@@ -10,9 +10,9 @@ spring:
     primary:
       driver-class-name: com.mysql.jdbc.Driver
       ## 互联网数据库
-      url: jdbc:mysql://101.68.86.229:23306/structgan?Unicode=true&characterEncoding=UTF-8&useSSL=false&allowMultiQueries=true
-      username: structgan
-      password: wyc!2022
+      url: jdbc:mysql://101.68.86.229:23306/guomei?Unicode=true&characterEncoding=UTF-8&useSSL=false&allowMultiQueries=true
+      username: guomei
+      password: Guomei!2022
 
   jpa:
     database: mysql
